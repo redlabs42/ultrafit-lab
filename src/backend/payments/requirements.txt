@@ -1,0 +1,18 @@
+# AWS SDK
+boto3==1.35.0
+
+# Payment Processing (Asaas)
+httpx==0.28.1
+
+# Security
+cryptography==43.0.1
+
+# Utilities
+python-dateutil==2.9.0.post0
+
+# Logging & Observability
+structlog==24.1.0
+
+# Validation
+pydantic>=2.10.0
+

@@ -1,0 +1,29 @@
+# AWS SDK
+boto3==1.35.0
+botocore==1.35.0
+
+# AI/ML
+openai==1.30.0
+anthropic==0.34.2
+
+# Payment Processing (Asaas)
+httpx==0.28.1
+
+# Security
+cryptography==43.0.1
+
+# Utilities
+python-dateutil==2.9.0.post0
+pytz==2024.2
+
+# Logging & Observability
+structlog==24.1.0
+
+# Validation
+pydantic>=2.10.0
+pydantic-settings>=2.6.0
+
+# Data Analysis (opcional - instalar separadamente se necessário)
+# pandas==2.1.4
+# numpy==1.26.4
+

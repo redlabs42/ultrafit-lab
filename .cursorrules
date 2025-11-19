@@ -1,0 +1,227 @@
+# Ultrafit Lab - Regras do Cursor
+
+## 🎯 Contexto do Projeto
+
+Ultrafit Lab é uma plataforma de IA para nutrição e treinos de academia, construída com arquitetura serverless na AWS.
+
+**Stack Principal:**
+
+- Frontend: Next.js 16 + React 19 + TypeScript + Tailwind CSS 4
+- Backend: AWS Lambda (Node.js/TypeScript)
+- Infraestrutura: Pulumi (TypeScript)
+- Gerenciador de pacotes: pnpm
+
+## 📋 Regras Obrigatórias - Nível Pleno/Sênior
+
+### 1. Observability
+
+- **Logs estruturados**: Sempre usar `pino` com logs estruturados (não console.log)
+- **Métricas**: Implementar P50/P95/P99 para endpoints críticos
+- **Tracing**: Adicionar tracing para serviços distribuídos e endpoints críticos
+
+### 2. Deploy Seguro
+
+- **CI/CD automatizado**: Todas as mudanças via PR com CI/CD
+- **Canary/Blue-Green**: Usar estratégias de deploy seguras
+- **Feature flags**: Para rollout gradual e rollback rápido
+
+### 3. Code Review Obrigatório
+
+- **PRs pequenas**: Máximo 400 linhas por PR
+- **Checklist**: Tests, migrations, changelog sempre incluídos
+- **2 reviewers**: Para mudanças críticas (infra, auth, payments)
+
+### 4. API Contract & Versionamento
+
+- **Breaking changes**: Apenas via nova versão de API
+- **Documentação**: Sempre documentar migração de versões
+- **Backward compatibility**: Manter compatibilidade quando possível
+
+### 5. Feature Flags
+
+- **Ciclo de vida**: Definir dono, data de criação e data de remoção
+- **Remoção**: Remover flags curtas (< 30 dias) automaticamente
+- **Documentação**: Documentar propósito de cada flag
+
+### 6. Gestão de Dependências e Segurança
+
+- **SCA automático**: Verificar vulnerabilidades automaticamente
+- **Política de updates**: Atualizar dependências regularmente
+- **Secrets**: Nunca commitar segredos; usar AWS Secrets Manager/Parameter Store
+
+### 7. Resiliência
+
+- **Timeouts**: Sempre definir timeouts em chamadas externas
+- **Retries**: Implementar retries exponenciais entre serviços
+- **Circuit breakers**: Para serviços externos críticos
+
+### 8. Runbooks & Mentoria
+
+- **Design docs**: Para features complexas
+- **Runbooks**: Documentar procedimentos de incidente
+- **Pairing**: Para onboarding de novos membros
+
+## 🎨 Regras de Desenvolvimento
+
+### 1. Mobile-First + Responsivo + A11y
+
+- **Mobile-first**: Sempre desenhar para mobile primeiro
+- **Media queries progressivas**: Usar unidades relativas
+- **Acessibilidade**: Considerar A11y desde o início (ARIA, contraste, navegação por teclado)
+
+### 2. KISS/YAGNI
+
+- **Implementar apenas o necessário**: Não criar abstrações "para o futuro"
+- **Evitar over-engineering**: Proibir "talvez no futuro"
+- **Simplicidade**: Preferir soluções simples e diretas
+
+### 3. Código Autoexplicativo
+
+- **Nomes claros**: Variáveis e funções com nomes descritivos
+- **Funções curtas**: Máximo 50 linhas por função
+- **Sem comentários redundantes**: Código deve ser autoexplicativo
+- **Comentar apenas o PORQUÊ**: Decisões, trade-offs, invariantes
+
+### 4. Segurança por Padrão
+
+- **Nunca commitar segredos**: Verificar .gitignore sempre
+- **Sanitizar/validar dados**: Todos os inputs devem ser validados
+- **OWASP Top 10**: Mitigar riscos conhecidos
+- **Headers de segurança**: Verificar headers HTTP
+- **Uso seguro de libs**: Verificar dependências regularmente
+
+### 5. Qualidade Contínua
+
+- **Testes unitários**: Para regras de negócio críticas
+- **Poucos E2E críticos**: Focar em fluxos principais
+- **PRs pequenas**: Máximo 400 linhas
+- **ESLint/Prettier/TypeScript strict**: Sempre passar
+- **Type-check antes de commit**: `pnpm run type-check`
+
+## 🔧 Convenções Técnicas
+
+### TypeScript
+
+- **Strict mode**: Sempre habilitado
+- **Type safety**: Evitar `any`, usar `unknown` quando necessário
+- **Interfaces**: Preferir interfaces sobre types quando possível
+- **Imports**: Usar imports absolutos quando fizer sentido
+
+### Backend (Lambda)
+
+- **Estrutura**: Cada domínio tem seu próprio `package.json`
+- **Handler**: Sempre exportar função `handler` como default
+- **Validação**: Usar `zod` para validação de inputs
+- **Logging**: Sempre usar `pino` (não console.log)
+- **Error handling**: Sempre tratar erros e retornar respostas padronizadas
+- **CORS**: Incluir headers CORS em todas as respostas
+
+### Frontend (Next.js)
+
+- **App Router**: Usar App Router (não Pages Router)
+- **Server Components**: Preferir Server Components quando possível
+- **Client Components**: Apenas quando necessário (interatividade, hooks)
+- **Formulários**: Usar React Hook Form + Zod
+- **Estado**: Zustand para estado global, React Query para dados do servidor
+- **Componentes**: Shadcn UI como base, customizar quando necessário
+
+### Commits
+
+- **Conventional Commits**: `feat:`, `fix:`, `docs:`, `refactor:`, etc.
+- **Mensagens claras**: Descrever o que e por quê
+- **Escopo**: Incluir escopo quando relevante (`feat(backend): adiciona validação`)
+
+### Git
+
+- **Branches**: `feature/nome`, `fix/nome`, `refactor/nome`
+- **PRs pequenas**: Máximo 400 linhas
+- **Descrição clara**: Sempre descrever o que foi feito e por quê
+
+## 📝 Padrões de Código
+
+### Backend Lambda
+
+```typescript
+// ✅ BOM
+export async function handler(
+  event: APIGatewayProxyEvent,
+  _context: unknown
+): Promise<APIGatewayProxyResult> {
+  try {
+    logger.info({ path: event.path }, "handler_invoked");
+    // lógica aqui
+    return createSuccessResponse({ data: result });
+  } catch (error) {
+    logger.error({ error }, "handler_error");
+    return createErrorResponse("Erro ao processar", 500);
+  }
+}
+
+// ❌ RUIM
+export async function handler(event: any) {
+  console.log("test");
+  return { statusCode: 200, body: JSON.stringify(event) };
+}
+```
+
+### Frontend Components
+
+```typescript
+// ✅ BOM
+export function UserProfile({ userId }: { userId: string }) {
+  const { data, isLoading } = useQuery({
+    queryKey: ["user", userId],
+    queryFn: () => fetchUser(userId),
+  });
+
+  if (isLoading) return <Skeleton />;
+  if (!data) return <Error />;
+
+  return <div>{data.name}</div>;
+}
+
+// ❌ RUIM
+export function UserProfile(props: any) {
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    fetch(`/api/user/${props.id}`).then(setUser);
+  }, []);
+  return <div>{user?.name}</div>;
+}
+```
+
+## 🚫 O Que NÃO Fazer
+
+- ❌ Não usar `console.log` (usar `pino`)
+- ❌ Não usar `any` sem necessidade
+- ❌ Não commitar arquivos `.env` ou secrets
+- ❌ Não criar abstrações "para o futuro"
+- ❌ Não fazer PRs grandes (> 400 linhas)
+- ❌ Não pular testes em código crítico
+- ❌ Não usar `var` (sempre `const` ou `let`)
+- ❌ Não criar funções muito longas (> 50 linhas)
+- ❌ Não ignorar erros de TypeScript
+- ❌ Não usar bibliotecas sem verificar segurança
+
+## ✅ Checklist Antes de Commitar
+
+- [ ] Type-check passando (`pnpm run type-check`)
+- [ ] Lint passando (`pnpm run lint`)
+- [ ] Testes passando (quando aplicável)
+- [ ] Sem console.log (usar pino)
+- [ ] Sem `any` desnecessário
+- [ ] Código autoexplicativo
+- [ ] Commits com Conventional Commits
+- [ ] PR descrita claramente
+
+## 📚 Referências
+
+- **Frontend**: Next.js 16 Docs, React 19 Docs, Shadcn UI
+- **Backend**: AWS Lambda Docs, AWS SDK v3
+- **Infra**: Pulumi Docs
+- **Qualidade**: ESLint, TypeScript Strict, Biome
+
+---
+
+**Última atualização**: 2025-01-27
+**Versão**: 1.0.0
