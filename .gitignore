@@ -10,8 +10,12 @@ dist/
 downloads/
 eggs/
 .eggs/
+# Python lib/ e lib64/ (não confundir com src/frontend/lib/)
+# Permitimos !src/frontend/lib/ abaixo
 lib/
 lib64/
+# Next.js/Frontend lib is allowed
+!src/frontend/lib/
 parts/
 sdist/
 var/

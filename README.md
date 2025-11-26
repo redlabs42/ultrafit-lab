@@ -17,7 +17,7 @@ Plataforma de IA para nutrição e treinos de academia, construída com arquitet
 
 ## 🎯 Visão Geral
 
-Ultrafit Lab é uma plataforma moderna para conversar com a IA com objetivo em nutrição e treinos de academia, desenvolvida com foco em escalabilidade, performance, segurança, experiência do usuário e saúde. Objetivo é que a IA substitua completamente uma nutricionista e um personal trainer. Dentro da plataforma o usuário poderá organizar sua alimentação de acordo com seu objetivo e poderá organizar sua rotina de treinos.
+Ultrafit Lab é uma plataforma moderna para conversar com a IA com objetivo em nutrição e treinos de esportes, desenvolvida com foco em escalabilidade, performance, segurança, experiência do usuário e saúde. Objetivo é que a IA substitua completamente uma nutricionista e um personal trainer. Dentro da plataforma o usuário poderá organizar sua alimentação de acordo com seu objetivo e poderá organizar sua rotina de treinos.
 
 ### Principais Funcionalidades
 
