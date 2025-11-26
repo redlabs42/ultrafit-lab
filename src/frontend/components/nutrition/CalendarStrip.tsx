@@ -33,7 +33,12 @@ export function CalendarStrip({
   };
 
   return (
-    <div className={cn("flex items-center justify-between gap-2", className)}>
+    <div
+      className={cn(
+        "flex items-center justify-between gap-1 md:gap-2",
+        className
+      )}
+    >
       <Button
         variant="ghost"
         size="icon"
@@ -44,7 +49,7 @@ export function CalendarStrip({
         <ChevronLeft className="h-4 w-4" />
       </Button>
 
-      <div className="flex flex-1 justify-around gap-2">
+      <div className="flex flex-1 justify-around gap-1 md:gap-2">
         {days.map((date, i) => {
           const isSelected = isSameDay(date, selectedDate);
           const isToday = isSameDay(date, new Date());

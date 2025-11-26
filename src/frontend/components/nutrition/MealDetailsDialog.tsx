@@ -42,7 +42,7 @@ export function MealDetailsDialog({ meal, children }: MealDetailsDialogProps) {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-2xl h-[80vh] flex flex-col p-0 gap-0 overflow-hidden border-none bg-surface/95 backdrop-blur-xl">
+      <DialogContent className="w-[95vw] max-w-2xl max-h-[85vh] h-auto flex flex-col p-0 gap-0 overflow-hidden border-none bg-surface/95 backdrop-blur-xl rounded-2xl">
         {/* Header Section with Gradient */}
         <div className="relative p-6 pb-8 bg-linear-to-br from-primary/10 via-primary/5 to-transparent border-b border-border/50">
           <div className="absolute top-4 right-4">

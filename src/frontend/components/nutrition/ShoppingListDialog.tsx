@@ -87,7 +87,7 @@ export function ShoppingListDialog({ plan }: ShoppingListDialogProps) {
       }}
     >
       <DialogTrigger asChild>
-        <Button variant="outline" className="gap-2">
+        <Button variant="outline" className="gap-2 w-full md:w-auto">
           <ShoppingCart className="h-4 w-4" />
           Lista de Compras
         </Button>

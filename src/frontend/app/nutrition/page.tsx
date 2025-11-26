@@ -263,7 +263,7 @@ export default function NutritionPage() {
 
   return (
     <DashboardLayout>
-      <div className="space-y-8">
+      <div className="space-y-8 pb-24 md:pb-8">
         <div className="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
           <div>
             <h1 className="text-4xl font-bold tracking-tight mb-2">Nutrição</h1>
@@ -271,7 +271,7 @@ export default function NutritionPage() {
               Gerencie seus planos nutricionais e refeições
             </p>
           </div>
-          <div className="flex items-center gap-2 w-full md:w-auto">
+          <div className="flex flex-col md:flex-row items-stretch md:items-center gap-2 w-full md:w-auto">
             {activePlan && <ShoppingListDialog plan={activePlan} />}
             <Button asChild className="flex-1 md:flex-none">
               <Link href="/nutrition/generate">
