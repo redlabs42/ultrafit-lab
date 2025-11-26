@@ -1,3 +1,5 @@
+"use client";
+
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import {
   Card,
@@ -24,14 +26,44 @@ import {
   ChevronRight,
 } from "lucide-react";
 
+import { useState, useEffect } from "react";
+import { useActivePlan } from "@/hooks/useNutrition";
+import Link from "next/link";
+
 export default function DashboardPage() {
+  const { data: activePlan } = useActivePlan();
+  const [consumedCalories, setConsumedCalories] = useState(0);
+
+  useEffect(() => {
+    // Calculate consumed calories from local storage
+    const saved = localStorage.getItem("consumed-meals-today");
+    const savedDate = localStorage.getItem("consumed-meals-date");
+    const today = new Date().toDateString();
+
+    if (activePlan && saved && savedDate === today) {
+      const consumedIds: string[] = JSON.parse(saved);
+      const total = activePlan.meals
+        .filter((meal) => consumedIds.includes(meal.id))
+        .reduce((acc, meal) => acc + meal.macros.calories, 0);
+      setConsumedCalories(total);
+    } else {
+      setConsumedCalories(0);
+    }
+  }, [activePlan]);
+
+  const calorieGoal = activePlan?.dailyMacros.calories || 2000;
+  const caloriePercentage = Math.min(
+    (consumedCalories / calorieGoal) * 100,
+    100
+  );
+
   return (
     <DashboardLayout>
       <div className="space-y-8 fade-in relative">
         {/* Background decorativo */}
         <div className="fixed inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-primary/10 via-accent/5 to-transparent rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-accent/10 via-warning/5 to-transparent rounded-full blur-3xl" />
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-linear-to-br from-primary/10 via-accent/5 to-transparent rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-linear-to-tr from-accent/10 via-warning/5 to-transparent rounded-full blur-3xl" />
         </div>
         {/* Header Premium */}
         <div className="relative">
@@ -39,12 +71,12 @@ export default function DashboardPage() {
             <div className="space-y-3">
               <div className="flex items-center gap-3">
                 <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-warning rounded-2xl blur-xl opacity-50 animate-pulse" />
-                  <div className="relative bg-gradient-to-r from-primary via-accent to-warning p-3 rounded-2xl shadow-lg">
+                  <div className="absolute inset-0 bg-linear-to-r from-primary via-accent to-warning rounded-2xl blur-xl opacity-50 animate-pulse" />
+                  <div className="relative bg-linear-to-r from-primary via-accent to-warning p-3 rounded-2xl shadow-lg">
                     <Sparkles className="h-6 w-6 text-white" />
                   </div>
                 </div>
-                <h1 className="text-4xl md:text-5xl font-bold tracking-tight bg-gradient-to-r from-primary via-accent to-warning bg-clip-text text-transparent">
+                <h1 className="text-4xl md:text-5xl font-bold tracking-tight bg-linear-to-r from-primary via-accent to-warning bg-clip-text text-transparent">
                   Dashboard
                 </h1>
               </div>
@@ -70,7 +102,7 @@ export default function DashboardPage() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 relative z-10">
           {/* Treinos */}
           <Card className="group relative overflow-hidden border-0 bg-white/5 backdrop-blur-xl shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-[1.02] rounded-3xl">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-linear-to-br from-primary/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-3xl group-hover:bg-primary/30 transition-colors duration-500" />
 
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 relative z-10">
@@ -78,8 +110,8 @@ export default function DashboardPage() {
                 Treinos
               </CardTitle>
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary/50 rounded-2xl blur-md opacity-50 group-hover:opacity-75 transition-opacity" />
-                <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-xl">
+                <div className="absolute inset-0 bg-linear-to-br from-primary to-primary/50 rounded-2xl blur-md opacity-50 group-hover:opacity-75 transition-opacity" />
+                <div className="relative w-12 h-12 rounded-2xl bg-linear-to-br from-primary to-primary/80 flex items-center justify-center shadow-xl">
                   <Dumbbell className="h-6 w-6 text-white" />
                 </div>
               </div>
@@ -87,7 +119,7 @@ export default function DashboardPage() {
 
             <CardContent className="relative z-10 space-y-4">
               <div>
-                <div className="text-4xl font-black bg-gradient-to-br from-primary via-primary to-primary/70 bg-clip-text text-transparent mb-2">
+                <div className="text-4xl font-black bg-linear-to-br from-primary via-primary to-primary/70 bg-clip-text text-transparent mb-2">
                   0
                 </div>
                 <p className="text-sm text-muted-foreground font-medium">
@@ -101,8 +133,8 @@ export default function DashboardPage() {
                   <span className="font-bold text-primary">0/5</span>
                 </div>
                 <div className="relative h-2 bg-primary/10 rounded-full overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/5 rounded-full" />
-                  <div className="relative h-full bg-gradient-to-r from-primary via-primary/90 to-primary/80 w-0 transition-all duration-1000 shadow-lg shadow-primary/50 rounded-full" />
+                  <div className="absolute inset-0 bg-linear-to-r from-primary/20 to-primary/5 rounded-full" />
+                  <div className="relative h-full bg-linear-to-r from-primary via-primary/90 to-primary/80 w-0 transition-all duration-1000 shadow-lg shadow-primary/50 rounded-full" />
                 </div>
               </div>
             </CardContent>
@@ -110,7 +142,7 @@ export default function DashboardPage() {
 
           {/* Calorias */}
           <Card className="group relative overflow-hidden border-0 bg-white/5 backdrop-blur-xl shadow-2xl hover:shadow-accent/20 transition-all duration-500 hover:scale-[1.02] rounded-3xl">
-            <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-linear-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute top-0 right-0 w-32 h-32 bg-accent/20 rounded-full blur-3xl group-hover:bg-accent/30 transition-colors duration-500" />
 
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 relative z-10">
@@ -118,8 +150,8 @@ export default function DashboardPage() {
                 Nutrição
               </CardTitle>
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent to-accent/50 rounded-2xl blur-md opacity-50 group-hover:opacity-75 transition-opacity" />
-                <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-accent to-accent/80 flex items-center justify-center shadow-xl">
+                <div className="absolute inset-0 bg-linear-to-br from-accent to-accent/50 rounded-2xl blur-md opacity-50 group-hover:opacity-75 transition-opacity" />
+                <div className="relative w-12 h-12 rounded-2xl bg-linear-to-br from-accent to-accent/80 flex items-center justify-center shadow-xl">
                   <Apple className="h-6 w-6 text-white" />
                 </div>
               </div>
@@ -127,8 +159,8 @@ export default function DashboardPage() {
 
             <CardContent className="relative z-10 space-y-4">
               <div>
-                <div className="text-4xl font-black bg-gradient-to-br from-accent via-accent to-accent/70 bg-clip-text text-transparent mb-2">
-                  0
+                <div className="text-4xl font-black bg-linear-to-br from-accent via-accent to-accent/70 bg-clip-text text-transparent mb-2">
+                  {consumedCalories}
                 </div>
                 <p className="text-sm text-muted-foreground font-medium">
                   kcal consumidas hoje
@@ -138,11 +170,16 @@ export default function DashboardPage() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-muted-foreground">Meta diária</span>
-                  <span className="font-bold text-accent">0/2000</span>
+                  <span className="font-bold text-accent">
+                    {consumedCalories}/{calorieGoal}
+                  </span>
                 </div>
                 <div className="relative h-2 bg-accent/10 rounded-full overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-accent/5 rounded-full" />
-                  <div className="relative h-full bg-gradient-to-r from-accent via-accent/90 to-accent/80 w-0 transition-all duration-1000 shadow-lg shadow-accent/50 rounded-full" />
+                  <div className="absolute inset-0 bg-linear-to-r from-accent/20 to-accent/5 rounded-full" />
+                  <div
+                    className="relative h-full bg-linear-to-r from-accent via-accent/90 to-accent/80 transition-all duration-1000 shadow-lg shadow-accent/50 rounded-full"
+                    style={{ width: `${caloriePercentage}%` }}
+                  />
                 </div>
               </div>
             </CardContent>
@@ -150,7 +187,7 @@ export default function DashboardPage() {
 
           {/* Sequência */}
           <Card className="group relative overflow-hidden border-0 bg-white/5 backdrop-blur-xl shadow-2xl hover:shadow-warning/20 transition-all duration-500 hover:scale-[1.02] rounded-3xl">
-            <div className="absolute inset-0 bg-gradient-to-br from-warning/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-linear-to-br from-warning/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute top-0 right-0 w-32 h-32 bg-warning/20 rounded-full blur-3xl group-hover:bg-warning/30 transition-colors duration-500" />
 
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 relative z-10">
@@ -158,8 +195,8 @@ export default function DashboardPage() {
                 Sequência
               </CardTitle>
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-warning to-warning/50 rounded-2xl blur-md opacity-50 group-hover:opacity-75 transition-opacity animate-pulse" />
-                <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-warning to-warning/80 flex items-center justify-center shadow-xl">
+                <div className="absolute inset-0 bg-linear-to-br from-warning to-warning/50 rounded-2xl blur-md opacity-50 group-hover:opacity-75 transition-opacity animate-pulse" />
+                <div className="relative w-12 h-12 rounded-2xl bg-linear-to-br from-warning to-warning/80 flex items-center justify-center shadow-xl">
                   <Flame className="h-6 w-6 text-white" />
                 </div>
               </div>
@@ -167,7 +204,7 @@ export default function DashboardPage() {
 
             <CardContent className="relative z-10 space-y-4">
               <div>
-                <div className="text-4xl font-black bg-gradient-to-br from-warning via-warning to-warning/70 bg-clip-text text-transparent mb-2">
+                <div className="text-4xl font-black bg-linear-to-br from-warning via-warning to-warning/70 bg-clip-text text-transparent mb-2">
                   0
                 </div>
                 <p className="text-sm text-muted-foreground font-medium">
@@ -186,7 +223,7 @@ export default function DashboardPage() {
 
           {/* Progresso */}
           <Card className="group relative overflow-hidden border-0 bg-white/5 backdrop-blur-xl shadow-2xl hover:shadow-success/20 transition-all duration-500 hover:scale-[1.02] rounded-3xl">
-            <div className="absolute inset-0 bg-gradient-to-br from-success/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-linear-to-br from-success/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute top-0 right-0 w-32 h-32 bg-success/20 rounded-full blur-3xl group-hover:bg-success/30 transition-colors duration-500" />
 
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 relative z-10">
@@ -194,8 +231,8 @@ export default function DashboardPage() {
                 Progresso
               </CardTitle>
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-success to-success/50 rounded-2xl blur-md opacity-50 group-hover:opacity-75 transition-opacity" />
-                <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-success to-success/80 flex items-center justify-center shadow-xl">
+                <div className="absolute inset-0 bg-linear-to-br from-success to-success/50 rounded-2xl blur-md opacity-50 group-hover:opacity-75 transition-opacity" />
+                <div className="relative w-12 h-12 rounded-2xl bg-linear-to-br from-success to-success/80 flex items-center justify-center shadow-xl">
                   <TrendingUp className="h-6 w-6 text-white" />
                 </div>
               </div>
@@ -203,7 +240,7 @@ export default function DashboardPage() {
 
             <CardContent className="relative z-10 space-y-4">
               <div>
-                <div className="text-4xl font-black bg-gradient-to-br from-success via-success to-success/70 bg-clip-text text-transparent mb-2">
+                <div className="text-4xl font-black bg-linear-to-br from-success via-success to-success/70 bg-clip-text text-transparent mb-2">
                   0%
                 </div>
                 <p className="text-sm text-muted-foreground font-medium">
@@ -217,8 +254,8 @@ export default function DashboardPage() {
                   <span className="font-bold text-success">0/20</span>
                 </div>
                 <div className="relative h-2 bg-success/10 rounded-full overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-success/20 to-success/5 rounded-full" />
-                  <div className="relative h-full bg-gradient-to-r from-success via-success/90 to-success/80 w-0 transition-all duration-1000 shadow-lg shadow-success/50 rounded-full" />
+                  <div className="absolute inset-0 bg-linear-to-r from-success/20 to-success/5 rounded-full" />
+                  <div className="relative h-full bg-linear-to-r from-success via-success/90 to-success/80 w-0 transition-all duration-1000 shadow-lg shadow-success/50 rounded-full" />
                 </div>
               </div>
             </CardContent>
@@ -229,14 +266,14 @@ export default function DashboardPage() {
         <div className="grid gap-6 md:grid-cols-2 relative z-10">
           {/* Próximo Treino */}
           <Card className="group relative overflow-hidden border-0 bg-white/5 backdrop-blur-2xl shadow-2xl hover:shadow-primary/10 transition-all duration-500 rounded-3xl">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-colors duration-500" />
 
             <CardHeader className="relative z-10 pb-6">
               <div className="flex items-center gap-4">
                 <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary to-accent rounded-2xl blur-lg opacity-50" />
-                  <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-primary via-primary to-accent flex items-center justify-center shadow-2xl">
+                  <div className="absolute inset-0 bg-linear-to-br from-primary to-accent rounded-2xl blur-lg opacity-50" />
+                  <div className="relative w-14 h-14 rounded-2xl bg-linear-to-br from-primary via-primary to-accent flex items-center justify-center shadow-2xl">
                     <Calendar className="h-7 w-7 text-white" />
                   </div>
                 </div>
@@ -258,8 +295,8 @@ export default function DashboardPage() {
 
                 <div className="relative text-center space-y-6">
                   <div className="relative inline-block">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full blur-xl" />
-                    <div className="relative w-20 h-20 rounded-full bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center mx-auto border border-primary/30">
+                    <div className="absolute inset-0 bg-linear-to-br from-primary/20 to-accent/20 rounded-full blur-xl" />
+                    <div className="relative w-20 h-20 rounded-full bg-linear-to-br from-primary/20 to-accent/10 flex items-center justify-center mx-auto border border-primary/30">
                       <Target className="h-10 w-10 text-primary" />
                     </div>
                   </div>
@@ -274,7 +311,7 @@ export default function DashboardPage() {
                   </div>
 
                   <Button
-                    className="w-full bg-gradient-to-r from-primary via-primary to-accent hover:opacity-90 shadow-xl shadow-primary/20 transition-all duration-300 hover:scale-[1.02] h-12 text-base font-bold rounded-xl"
+                    className="w-full bg-linear-to-r from-primary via-primary to-accent hover:opacity-90 shadow-xl shadow-primary/20 transition-all duration-300 hover:scale-[1.02] h-12 text-base font-bold rounded-xl"
                     size="lg"
                   >
                     <Plus className="h-5 w-5 mr-2" />
@@ -287,14 +324,14 @@ export default function DashboardPage() {
 
           {/* Plano Nutricional */}
           <Card className="group relative overflow-hidden border-0 bg-white/5 backdrop-blur-2xl shadow-2xl hover:shadow-accent/10 transition-all duration-500 rounded-3xl">
-            <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-success/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-linear-to-br from-accent/5 via-transparent to-success/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute -top-24 -right-24 w-48 h-48 bg-accent/10 rounded-full blur-3xl group-hover:bg-accent/20 transition-colors duration-500" />
 
             <CardHeader className="relative z-10 pb-6">
               <div className="flex items-center gap-4">
                 <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-accent to-success rounded-2xl blur-lg opacity-50" />
-                  <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-accent via-accent to-success flex items-center justify-center shadow-2xl">
+                  <div className="absolute inset-0 bg-linear-to-br from-accent to-success rounded-2xl blur-lg opacity-50" />
+                  <div className="relative w-14 h-14 rounded-2xl bg-linear-to-br from-accent via-accent to-success flex items-center justify-center shadow-2xl">
                     <Utensils className="h-7 w-7 text-white" />
                   </div>
                 </div>
@@ -315,29 +352,78 @@ export default function DashboardPage() {
                 <div className="absolute top-0 right-0 w-32 h-32 bg-accent/10 rounded-full blur-2xl" />
 
                 <div className="relative text-center space-y-6">
-                  <div className="relative inline-block">
-                    <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-success/20 rounded-full blur-xl" />
-                    <div className="relative w-20 h-20 rounded-full bg-gradient-to-br from-accent/20 to-success/10 flex items-center justify-center mx-auto border border-accent/30">
-                      <Apple className="h-10 w-10 text-accent" />
-                    </div>
-                  </div>
+                  {activePlan ? (
+                    <>
+                      <div className="space-y-2">
+                        <h3 className="text-xl font-bold text-accent">
+                          {activePlan.name}
+                        </h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {activePlan.meals.length} refeições planejadas para
+                          hoje
+                        </p>
+                      </div>
 
-                  <div className="space-y-2">
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      Nenhum plano nutricional ativo
-                    </p>
-                    <p className="text-xs text-accent font-semibold">
-                      Crie um plano personalizado com IA!
-                    </p>
-                  </div>
+                      <div className="grid grid-cols-2 gap-4 text-sm">
+                        <div className="bg-white/5 p-3 rounded-xl">
+                          <span className="block text-muted-foreground text-xs">
+                            Meta
+                          </span>
+                          <span className="font-bold">
+                            {activePlan.dailyMacros.calories} kcal
+                          </span>
+                        </div>
+                        <div className="bg-white/5 p-3 rounded-xl">
+                          <span className="block text-muted-foreground text-xs">
+                            Consumido
+                          </span>
+                          <span className="font-bold text-accent">
+                            {consumedCalories} kcal
+                          </span>
+                        </div>
+                      </div>
 
-                  <Button
-                    className="w-full bg-gradient-to-r from-accent via-accent to-success hover:opacity-90 shadow-xl shadow-accent/20 transition-all duration-300 hover:scale-[1.02] h-12 text-base font-bold rounded-xl"
-                    size="lg"
-                  >
-                    <Plus className="h-5 w-5 mr-2" />
-                    Criar Plano Nutricional
-                  </Button>
+                      <Button
+                        asChild
+                        className="w-full bg-linear-to-r from-accent via-accent to-success hover:opacity-90 shadow-xl shadow-accent/20 transition-all duration-300 hover:scale-[1.02] h-12 text-base font-bold rounded-xl"
+                        size="lg"
+                      >
+                        <Link href="/nutrition">
+                          <Utensils className="h-5 w-5 mr-2" />
+                          Ver Detalhes
+                        </Link>
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <div className="relative inline-block">
+                        <div className="absolute inset-0 bg-linear-to-br from-accent/20 to-success/20 rounded-full blur-xl" />
+                        <div className="relative w-20 h-20 rounded-full bg-linear-to-br from-accent/20 to-success/10 flex items-center justify-center mx-auto border border-accent/30">
+                          <Apple className="h-10 w-10 text-accent" />
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          Nenhum plano nutricional ativo
+                        </p>
+                        <p className="text-xs text-accent font-semibold">
+                          Crie um plano personalizado com IA!
+                        </p>
+                      </div>
+
+                      <Button
+                        asChild
+                        className="w-full bg-linear-to-r from-accent via-accent to-success hover:opacity-90 shadow-xl shadow-accent/20 transition-all duration-300 hover:scale-[1.02] h-12 text-base font-bold rounded-xl"
+                        size="lg"
+                      >
+                        <Link href="/nutrition/generate">
+                          <Plus className="h-5 w-5 mr-2" />
+                          Criar Plano Nutricional
+                        </Link>
+                      </Button>
+                    </>
+                  )}
                 </div>
               </div>
             </CardContent>
@@ -346,19 +432,19 @@ export default function DashboardPage() {
 
         {/* Quick Actions Premium */}
         <Card className="group relative overflow-hidden border-0 bg-white/5 backdrop-blur-2xl shadow-2xl relative z-10 rounded-3xl">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-success/5 opacity-50" />
+          <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-accent/5 to-success/5 opacity-50" />
           <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
           <div className="absolute -top-24 -right-24 w-64 h-64 bg-accent/10 rounded-full blur-3xl" />
 
           <CardHeader className="relative z-10 pb-6">
             <div className="flex items-center gap-3 mb-2">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-success rounded-2xl blur-md opacity-50" />
-                <div className="relative bg-gradient-to-r from-primary via-accent to-success p-2.5 rounded-2xl">
+                <div className="absolute inset-0 bg-linear-to-r from-primary via-accent to-success rounded-2xl blur-md opacity-50" />
+                <div className="relative bg-linear-to-r from-primary via-accent to-success p-2.5 rounded-2xl">
                   <Zap className="h-5 w-5 text-white" />
                 </div>
               </div>
-              <CardTitle className="text-3xl font-bold bg-gradient-to-r from-primary via-accent to-success bg-clip-text text-transparent">
+              <CardTitle className="text-3xl font-bold bg-linear-to-r from-primary via-accent to-success bg-clip-text text-transparent">
                 Ações Rápidas
               </CardTitle>
             </div>
@@ -370,14 +456,17 @@ export default function DashboardPage() {
           <CardContent className="relative z-10">
             <div className="grid gap-6 md:grid-cols-3">
               {/* Novo Treino */}
-              <button className="group/btn relative overflow-hidden rounded-3xl bg-white/5 p-6 border border-white/10 hover:border-primary/40 transition-all duration-500 hover:scale-[1.05] hover:shadow-2xl hover:shadow-primary/20 text-left">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500" />
+              <button
+                type="button"
+                className="group/btn relative overflow-hidden rounded-3xl bg-white/5 p-6 border border-white/10 hover:border-primary/40 transition-all duration-500 hover:scale-[1.05] hover:shadow-2xl hover:shadow-primary/20 text-left"
+              >
+                <div className="absolute inset-0 bg-linear-to-br from-primary/20 via-transparent to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500" />
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-2xl opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500" />
 
                 <div className="relative z-10 space-y-4">
                   <div className="relative inline-block">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary/50 rounded-2xl blur-lg opacity-50 group-hover/btn:opacity-75 transition-opacity" />
-                    <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-xl">
+                    <div className="absolute inset-0 bg-linear-to-br from-primary to-primary/50 rounded-2xl blur-lg opacity-50 group-hover/btn:opacity-75 transition-opacity" />
+                    <div className="relative w-14 h-14 rounded-2xl bg-linear-to-br from-primary to-primary/80 flex items-center justify-center shadow-xl">
                       <Dumbbell className="h-7 w-7 text-white" />
                     </div>
                   </div>
@@ -397,14 +486,17 @@ export default function DashboardPage() {
               </button>
 
               {/* Plano Alimentar */}
-              <button className="group/btn relative overflow-hidden rounded-3xl bg-white/5 p-6 border border-white/10 hover:border-accent/40 transition-all duration-500 hover:scale-[1.05] hover:shadow-2xl hover:shadow-accent/20 text-left">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500" />
+              <button
+                type="button"
+                className="group/btn relative overflow-hidden rounded-3xl bg-white/5 p-6 border border-white/10 hover:border-accent/40 transition-all duration-500 hover:scale-[1.05] hover:shadow-2xl hover:shadow-accent/20 text-left"
+              >
+                <div className="absolute inset-0 bg-linear-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500" />
                 <div className="absolute top-0 right-0 w-32 h-32 bg-accent/20 rounded-full blur-2xl opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500" />
 
                 <div className="relative z-10 space-y-4">
                   <div className="relative inline-block">
-                    <div className="absolute inset-0 bg-gradient-to-br from-accent to-accent/50 rounded-2xl blur-lg opacity-50 group-hover/btn:opacity-75 transition-opacity" />
-                    <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-accent to-accent/80 flex items-center justify-center shadow-xl">
+                    <div className="absolute inset-0 bg-linear-to-br from-accent to-accent/50 rounded-2xl blur-lg opacity-50 group-hover/btn:opacity-75 transition-opacity" />
+                    <div className="relative w-14 h-14 rounded-2xl bg-linear-to-br from-accent to-accent/80 flex items-center justify-center shadow-xl">
                       <Apple className="h-7 w-7 text-white" />
                     </div>
                   </div>
@@ -424,14 +516,17 @@ export default function DashboardPage() {
               </button>
 
               {/* Ver Progresso */}
-              <button className="group/btn relative overflow-hidden rounded-3xl bg-white/5 p-6 border border-white/10 hover:border-success/40 transition-all duration-500 hover:scale-[1.05] hover:shadow-2xl hover:shadow-success/20 text-left">
-                <div className="absolute inset-0 bg-gradient-to-br from-success/20 via-transparent to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500" />
+              <button
+                type="button"
+                className="group/btn relative overflow-hidden rounded-3xl bg-white/5 p-6 border border-white/10 hover:border-success/40 transition-all duration-500 hover:scale-[1.05] hover:shadow-2xl hover:shadow-success/20 text-left"
+              >
+                <div className="absolute inset-0 bg-linear-to-br from-success/20 via-transparent to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500" />
                 <div className="absolute top-0 right-0 w-32 h-32 bg-success/20 rounded-full blur-2xl opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500" />
 
                 <div className="relative z-10 space-y-4">
                   <div className="relative inline-block">
-                    <div className="absolute inset-0 bg-gradient-to-br from-success to-success/50 rounded-2xl blur-lg opacity-50 group-hover/btn:opacity-75 transition-opacity" />
-                    <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-success to-success/80 flex items-center justify-center shadow-xl">
+                    <div className="absolute inset-0 bg-linear-to-br from-success to-success/50 rounded-2xl blur-lg opacity-50 group-hover/btn:opacity-75 transition-opacity" />
+                    <div className="relative w-14 h-14 rounded-2xl bg-linear-to-br from-success to-success/80 flex items-center justify-center shadow-xl">
                       <TrendingUp className="h-7 w-7 text-white" />
                     </div>
                   </div>
@@ -455,15 +550,15 @@ export default function DashboardPage() {
 
         {/* Conquistas Section */}
         <Card className="group relative overflow-hidden border-0 bg-white/5 backdrop-blur-2xl shadow-2xl relative z-10 rounded-3xl">
-          <div className="absolute inset-0 bg-gradient-to-br from-warning/5 via-transparent to-primary/5 opacity-50" />
+          <div className="absolute inset-0 bg-linear-to-br from-warning/5 via-transparent to-primary/5 opacity-50" />
           <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-warning/10 rounded-full blur-3xl" />
 
           <CardHeader className="relative z-10 pb-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-warning to-primary rounded-2xl blur-md opacity-50 animate-pulse" />
-                  <div className="relative bg-gradient-to-r from-warning to-primary p-2.5 rounded-2xl">
+                  <div className="absolute inset-0 bg-linear-to-r from-warning to-primary rounded-2xl blur-md opacity-50 animate-pulse" />
+                  <div className="relative bg-linear-to-r from-warning to-primary p-2.5 rounded-2xl">
                     <Award className="h-5 w-5 text-white" />
                   </div>
                 </div>
@@ -512,13 +607,13 @@ export default function DashboardPage() {
                   locked: true,
                   color: "accent",
                 },
-              ].map((achievement, i) => (
+              ].map((achievement) => (
                 <div
-                  key={i}
+                  key={achievement.name}
                   className={`relative overflow-hidden rounded-2xl p-4 border transition-all duration-300 ${
                     achievement.locked
                       ? "bg-muted/20 border-border/30 opacity-50"
-                      : `bg-gradient-to-br from-${achievement.color}/10 to-transparent border-${achievement.color}/30 hover:scale-105 hover:shadow-lg`
+                      : `bg-linear-to-br from-${achievement.color}/10 to-transparent border-${achievement.color}/30 hover:scale-105 hover:shadow-lg`
                   }`}
                 >
                   <div className="text-center space-y-2">
@@ -526,7 +621,7 @@ export default function DashboardPage() {
                       className={`w-12 h-12 rounded-xl mx-auto flex items-center justify-center ${
                         achievement.locked
                           ? "bg-muted/30"
-                          : `bg-gradient-to-br from-${achievement.color}/20 to-${achievement.color}/10`
+                          : `bg-linear-to-br from-${achievement.color}/20 to-${achievement.color}/10`
                       }`}
                     >
                       <achievement.icon

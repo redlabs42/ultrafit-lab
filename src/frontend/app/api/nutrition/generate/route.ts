@@ -21,7 +21,7 @@ const nutritionPlanSchema = z.object({
 		calories: z.number(),
 		protein: z.number(),
 		carbs: z.number(),
-		fats: z.number(),
+		fat: z.number(),
 	}),
 	meals: z.array(
 		z.object({
@@ -33,7 +33,7 @@ const nutritionPlanSchema = z.object({
 				calories: z.number(),
 				protein: z.number(),
 				carbs: z.number(),
-				fats: z.number(),
+				fat: z.number(),
 			}),
 		}),
 	),
@@ -90,7 +90,7 @@ Crie um plano nutricional no formato JSON com a seguinte estrutura EXATA:
     "calories": número_total_calorias,
     "protein": gramas_proteína,
     "carbs": gramas_carboidratos,
-    "fats": gramas_gorduras
+    "fat": gramas_gorduras
   },
   "meals": [
     {
@@ -102,7 +102,7 @@ Crie um plano nutricional no formato JSON com a seguinte estrutura EXATA:
         "calories": número,
         "protein": número,
         "carbs": número,
-        "fats": número
+        "fat": número
       }
     },
     {
@@ -114,7 +114,7 @@ Crie um plano nutricional no formato JSON com a seguinte estrutura EXATA:
         "calories": número,
         "protein": número,
         "carbs": número,
-        "fats": número
+        "fat": número
       }
     },
     {
@@ -126,7 +126,7 @@ Crie um plano nutricional no formato JSON com a seguinte estrutura EXATA:
         "calories": número,
         "protein": número,
         "carbs": número,
-        "fats": número
+        "fat": número
       }
     },
     {
@@ -138,7 +138,7 @@ Crie um plano nutricional no formato JSON com a seguinte estrutura EXATA:
         "calories": número,
         "protein": número,
         "carbs": número,
-        "fats": número
+        "fat": número
       }
     },
     {
@@ -150,7 +150,7 @@ Crie um plano nutricional no formato JSON com a seguinte estrutura EXATA:
         "calories": número,
         "protein": número,
         "carbs": número,
-        "fats": número
+        "fat": número
       }
     },
     {
@@ -162,7 +162,7 @@ Crie um plano nutricional no formato JSON com a seguinte estrutura EXATA:
         "calories": número,
         "protein": número,
         "carbs": número,
-        "fats": número
+        "fat": número
       }
     }
   ],
@@ -179,7 +179,7 @@ IMPORTANTE:
 
 		// Use faster model optimized for speed
 		const { text } = await generateText({
-			model: google("gemini-2.0-flash-exp"),
+			model: google("gemini-1.5-flash-latest"),
 			prompt,
 		});
 
