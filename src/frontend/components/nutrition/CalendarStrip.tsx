@@ -45,7 +45,7 @@ export function CalendarStrip({
       </Button>
 
       <div className="flex flex-1 justify-around gap-2">
-        {days.map((date) => {
+        {days.map((date, i) => {
           const isSelected = isSameDay(date, selectedDate);
           const isToday = isSameDay(date, new Date());
 
@@ -61,7 +61,9 @@ export function CalendarStrip({
                   : "bg-surface hover:bg-surface-hover text-muted-foreground hover:text-foreground border border-transparent hover:border-border/50",
                 isToday &&
                   !isSelected &&
-                  "border-primary/20 bg-primary/5 text-primary"
+                  "border-primary/20 bg-primary/5 text-primary",
+                // Hide first and last day on mobile (show 3 days), show all 5 on md+
+                (i === 0 || i === 4) && "hidden md:flex"
               )}
             >
               <span className="text-[10px] font-medium uppercase tracking-wider opacity-80">

@@ -71,7 +71,7 @@ export function MealDetailsDialog({ meal, children }: MealDetailsDialogProps) {
             </div>
 
             {/* Macro Cards */}
-            <div className="grid grid-cols-4 gap-3 mt-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
               <div className="bg-surface/60 backdrop-blur-sm rounded-xl p-3 border border-border/50 text-center shadow-xs">
                 <div className="text-xs text-muted-foreground uppercase tracking-wider font-medium mb-1">
                   Calorias
