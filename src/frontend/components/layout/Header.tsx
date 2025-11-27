@@ -1,14 +1,13 @@
 "use client";
 
-import Link from "next/link";
-import { Moon, Sun, Sparkles } from "lucide-react";
 import { MobileNav } from "@/components/layout/MobileNav";
-import { UserMenu } from "@/components/navigation/UserMenu";
 import { NotificationBell } from "@/components/navigation/NotificationBell";
+import { UserMenu } from "@/components/navigation/UserMenu";
 import { Button } from "@/components/ui/button";
-import { useAuthStore } from "@/store";
 import { useTheme } from "@/hooks/useTheme";
-import { cn } from "@/lib/utils";
+import { useAuthStore } from "@/store";
+import { Moon, Sparkles, Sun } from "lucide-react";
+import Link from "next/link";
 
 export function Header() {
   const { isAuthenticated } = useAuthStore();
@@ -19,98 +18,59 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full p-4">
-      <div className="mx-auto flex h-16 items-center justify-between rounded-3xl border border-white/10 bg-background/60 px-6 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:bg-background/70">
-        {/* Logo e Navegação */}
-        <div className="flex items-center gap-6">
+    <header className="sticky top-0 z-40 w-full border-b border-white/5 bg-background/70 backdrop-blur-xl supports-backdrop-filter:bg-background/60">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-8">
+        {/* Logo e Navegação Mobile */}
+        <div className="flex items-center gap-4">
           {isAuthenticated && <MobileNav />}
 
           <Link
             href={isAuthenticated ? "/dashboard" : "/"}
-            className="group flex items-center space-x-2 transition-all hover:scale-105"
+            className="group flex items-center gap-2 transition-all hover:opacity-90"
           >
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-lg blur-sm opacity-50 group-hover:opacity-75 transition-opacity" />
-              <div className="relative bg-gradient-to-r from-primary to-accent p-2 rounded-lg shadow-lg">
-                <Sparkles className="h-5 w-5 text-white" />
-              </div>
+            <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-linear-to-br from-primary to-accent shadow-lg shadow-primary/20 transition-transform group-hover:scale-105">
+              <Sparkles className="h-4 w-4 text-white" />
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <span className="hidden text-lg font-bold tracking-tight sm:inline-block">
               Ultrafit Lab
             </span>
           </Link>
 
           {/* Navegação Desktop - apenas quando logado */}
           {isAuthenticated && (
-            <nav className="hidden md:flex items-center gap-1 ml-4">
-              <Button
-                asChild
-                variant="ghost"
-                size="sm"
-                className="text-sm font-medium rounded-xl hover:bg-primary/10 hover:text-primary transition-colors"
-              >
-                <Link href="/dashboard">Dashboard</Link>
-              </Button>
-              <Button
-                asChild
-                variant="ghost"
-                size="sm"
-                className="text-sm font-medium rounded-xl hover:bg-primary/10 hover:text-primary transition-colors"
-              >
-                <Link href="/workout/plan">Treinos</Link>
-              </Button>
-              <Button
-                asChild
-                variant="ghost"
-                size="sm"
-                className="text-sm font-medium rounded-xl hover:bg-primary/10 hover:text-primary transition-colors"
-              >
-                <Link href="/nutrition">Nutrição</Link>
-              </Button>
-              <Button
-                asChild
-                variant="ghost"
-                size="sm"
-                className="text-sm font-medium rounded-xl hover:bg-primary/10 hover:text-primary transition-colors"
-              >
-                <Link href="/progress">Progresso</Link>
-              </Button>
+            <nav className="hidden md:flex items-center gap-1 ml-6">
+              {[
+                { href: "/dashboard", label: "Dashboard" },
+                { href: "/workout/plan", label: "Treinos" },
+                { href: "/nutrition", label: "Nutrição" },
+                { href: "/progress", label: "Progresso" },
+              ].map((link) => (
+                <Button
+                  key={link.href}
+                  asChild
+                  variant="ghost"
+                  size="sm"
+                  className="text-sm font-medium text-muted-foreground hover:bg-primary/10 hover:text-primary transition-all rounded-lg px-3"
+                >
+                  <Link href={link.href}>{link.label}</Link>
+                </Button>
+              ))}
             </nav>
           )}
         </div>
 
         {/* Ações do Header */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-4">
           {/* Toggle de Tema */}
           <Button
             variant="ghost"
             size="icon"
             onClick={toggleTheme}
-            className={cn(
-              "relative h-10 w-10 rounded-full transition-all duration-300",
-              "hover:bg-primary/10 hover:text-primary hover:scale-110",
-              "focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-            )}
+            className="relative h-9 w-9 rounded-full text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors"
             aria-label={isDark ? "Ativar modo claro" : "Ativar modo escuro"}
           >
-            <div className="relative w-5 h-5">
-              <Sun
-                className={cn(
-                  "absolute inset-0 h-5 w-5 transition-all duration-500 ease-spring",
-                  isDark
-                    ? "rotate-90 scale-0 opacity-0"
-                    : "rotate-0 scale-100 opacity-100"
-                )}
-              />
-              <Moon
-                className={cn(
-                  "absolute inset-0 h-5 w-5 transition-all duration-500 ease-spring",
-                  isDark
-                    ? "rotate-0 scale-100 opacity-100"
-                    : "-rotate-90 scale-0 opacity-0"
-                )}
-              />
-            </div>
+            <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+            <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           </Button>
 
           {/* Notificações - apenas quando logado */}
@@ -118,7 +78,9 @@ export function Header() {
 
           {/* Menu do Usuário ou Botões de Login */}
           {isAuthenticated ? (
-            <UserMenu />
+            <div className="hidden md:block">
+              <UserMenu />
+            </div>
           ) : (
             <div className="flex items-center gap-3">
               <Button
@@ -132,7 +94,7 @@ export function Header() {
               <Button
                 asChild
                 size="sm"
-                className="bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-all shadow-lg hover:shadow-primary/25 rounded-xl"
+                className="bg-linear-to-r from-primary to-accent hover:opacity-90 transition-all shadow-lg hover:shadow-primary/25 rounded-xl text-white font-medium px-6"
               >
                 <Link href="/register">Começar</Link>
               </Button>
