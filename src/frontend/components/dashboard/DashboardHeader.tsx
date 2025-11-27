@@ -1,5 +1,5 @@
-import { Badge } from "@/components/ui/badge";
 import { Activity, Sparkles, Zap } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 export function DashboardHeader() {
   return (

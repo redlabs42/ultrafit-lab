@@ -58,7 +58,9 @@ export default function WorkoutPlanPage() {
     <DashboardLayout>
       <div className="space-y-8">
         <div>
-          <h1 className="text-4xl font-bold tracking-tight mb-2">{plan.name}</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-2">
+            {plan.name}
+          </h1>
           {plan.description && (
             <p className="text-secondary text-lg">{plan.description}</p>
           )}

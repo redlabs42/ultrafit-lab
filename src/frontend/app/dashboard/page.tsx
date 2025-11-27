@@ -1,5 +1,7 @@
 "use client";
 
+import { Apple, Dumbbell, Flame, TrendingUp } from "lucide-react";
+import { useEffect, useState } from "react";
 import { AchievementsList } from "@/components/dashboard/AchievementsList";
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { NextWorkoutCard } from "@/components/dashboard/NextWorkoutCard";
@@ -8,8 +10,6 @@ import { QuickActions } from "@/components/dashboard/QuickActions";
 import { StatsCard } from "@/components/dashboard/StatsCard";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { useActivePlan } from "@/hooks/useNutrition";
-import { Apple, Dumbbell, Flame, TrendingUp } from "lucide-react";
-import { useEffect, useState } from "react";
 
 export default function DashboardPage() {
   const { data: activePlan } = useActivePlan();
@@ -35,7 +35,7 @@ export default function DashboardPage() {
   const calorieGoal = activePlan?.dailyMacros.calories || 2000;
   const caloriePercentage = Math.min(
     (consumedCalories / calorieGoal) * 100,
-    100
+    100,
   );
 
   return (

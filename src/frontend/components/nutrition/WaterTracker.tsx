@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Plus, Minus, Droplets } from "lucide-react";
+import { Droplets, Minus, Plus } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -23,7 +23,7 @@ export function WaterTracker({
   useEffect(() => {
     setIsClient(true);
     const history = JSON.parse(
-      localStorage.getItem("water-tracker-history") || "{}"
+      localStorage.getItem("water-tracker-history") || "{}",
     );
     setCurrentAmount(history[dateKey] || 0);
   }, [dateKey]);
@@ -32,7 +32,7 @@ export function WaterTracker({
   useEffect(() => {
     if (isClient) {
       const history = JSON.parse(
-        localStorage.getItem("water-tracker-history") || "{}"
+        localStorage.getItem("water-tracker-history") || "{}",
       );
       history[dateKey] = currentAmount;
       localStorage.setItem("water-tracker-history", JSON.stringify(history));

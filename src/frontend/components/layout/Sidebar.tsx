@@ -55,7 +55,7 @@ export function Sidebar() {
                           "group flex gap-x-3 rounded-2xl p-3 text-sm leading-6 font-semibold transition-all duration-300 ease-out",
                           isActive
                             ? "bg-primary/10 text-primary shadow-[0_0_20px_rgba(59,130,246,0.15)] border border-primary/20"
-                            : "text-muted-foreground hover:text-white hover:bg-white/5"
+                            : "text-muted-foreground hover:text-white hover:bg-white/5",
                         )}
                       >
                         <item.icon
@@ -63,7 +63,7 @@ export function Sidebar() {
                             "h-6 w-6 shrink-0 transition-colors duration-300",
                             isActive
                               ? "text-primary"
-                              : "text-muted-foreground group-hover:text-white"
+                              : "text-muted-foreground group-hover:text-white",
                           )}
                           aria-hidden="true"
                         />
@@ -100,7 +100,7 @@ export function Sidebar() {
                             "group flex gap-x-3 rounded-2xl p-2 text-xs leading-6 font-semibold transition-all duration-300 ease-out",
                             isActive
                               ? "bg-primary/10 text-primary"
-                              : "text-muted-foreground hover:text-white hover:bg-white/5"
+                              : "text-muted-foreground hover:text-white hover:bg-white/5",
                           )}
                         >
                           <item.icon
@@ -108,7 +108,7 @@ export function Sidebar() {
                               "h-4 w-4 shrink-0 transition-colors duration-300",
                               isActive
                                 ? "text-primary"
-                                : "text-muted-foreground group-hover:text-white"
+                                : "text-muted-foreground group-hover:text-white",
                             )}
                             aria-hidden="true"
                           />

@@ -48,7 +48,9 @@ export function LoginForm() {
   return (
     <Card className="w-full">
       <CardHeader className="text-center">
-        <CardTitle className="text-3xl font-bold mb-2">Bem-vindo de volta</CardTitle>
+        <CardTitle className="text-3xl font-bold mb-2">
+          Bem-vindo de volta
+        </CardTitle>
         <CardDescription className="text-base">
           Entre com sua conta para acessar o Ultrafit Lab
         </CardDescription>
@@ -81,7 +83,9 @@ export function LoginForm() {
               {...register("password")}
             />
             {errors.password && (
-              <p className="text-sm text-destructive">{errors.password.message}</p>
+              <p className="text-sm text-destructive">
+                {errors.password.message}
+              </p>
             )}
           </div>
 
@@ -107,7 +111,10 @@ export function LoginForm() {
 
           <p className="text-sm text-center text-muted-foreground">
             Não tem uma conta?{" "}
-            <Link href="/register" className="text-primary hover:underline font-semibold">
+            <Link
+              href="/register"
+              className="text-primary hover:underline font-semibold"
+            >
               Criar conta
             </Link>
           </p>

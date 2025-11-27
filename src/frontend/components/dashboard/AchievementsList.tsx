@@ -1,3 +1,4 @@
+import { Award, ChevronRight, Dumbbell, Flame, Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -6,7 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Award, ChevronRight, Dumbbell, Flame, Target } from "lucide-react";
 
 export function AchievementsList() {
   const achievements = [

@@ -69,7 +69,9 @@ export function GeneratedContent({
         <div className="rounded-lg bg-muted p-4 max-h-96 overflow-y-auto">
           {type === "text" ? (
             <p className="text-sm whitespace-pre-wrap">
-              {typeof content === "string" ? content : JSON.stringify(content, null, 2)}
+              {typeof content === "string"
+                ? content
+                : JSON.stringify(content, null, 2)}
             </p>
           ) : (
             <pre className="text-xs">{JSON.stringify(content, null, 2)}</pre>

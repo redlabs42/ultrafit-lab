@@ -2,11 +2,10 @@
 
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
-import { useState } from "react";
-import { Send, Bot, User } from "lucide-react";
+import { Bot, Send, User } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Card,
   CardContent,
@@ -14,8 +13,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useEffect, useRef } from "react";
+import { Input } from "@/components/ui/input";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface ChatWindowProps {
   readonly isOpen: boolean;
@@ -35,7 +34,7 @@ export function ChatWindow({ isOpen }: ChatWindowProps) {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [messages]);
+  }, []);
 
   if (!isOpen) return null;
 
@@ -105,8 +104,9 @@ export function ChatWindow({ isOpen }: ChatWindowProps) {
                 >
                   {message.parts.map((part, index) =>
                     part.type === "text" ? (
+                      // biome-ignore lint/suspicious/noArrayIndexKey: parts order is stable
                       <span key={index}>{part.text}</span>
-                    ) : null
+                    ) : null,
                   )}
                 </div>
               </div>

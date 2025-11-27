@@ -1,3 +1,5 @@
+import { Apple, ChevronRight, Plus, Utensils } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -7,8 +9,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useActivePlan } from "@/hooks/useNutrition";
-import { Apple, ChevronRight, Plus, Utensils } from "lucide-react";
-import Link from "next/link";
 
 interface NutritionSummaryCardProps {
   consumedCalories: number;

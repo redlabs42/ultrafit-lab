@@ -1,5 +1,9 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, useForm } from "react-hook-form";
+import { toast } from "sonner";
+import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -19,10 +23,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useAuthStore } from "@/store";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, useForm } from "react-hook-form";
-import { toast } from "sonner";
-import * as z from "zod";
 
 const profileSchema = z.object({
   name: z.string().min(2, "Nome deve ter no mínimo 2 caracteres"),
@@ -267,8 +267,8 @@ export function ProfileForm() {
                               ? field.onChange([...currentValue, option.id])
                               : field.onChange(
                                   currentValue.filter(
-                                    (value) => value !== option.id
-                                  )
+                                    (value) => value !== option.id,
+                                  ),
                                 );
                           }}
                         />
@@ -303,8 +303,8 @@ export function ProfileForm() {
                               ? field.onChange([...currentValue, option.id])
                               : field.onChange(
                                   currentValue.filter(
-                                    (value) => value !== option.id
-                                  )
+                                    (value) => value !== option.id,
+                                  ),
                                 );
                           }}
                         />
@@ -391,8 +391,8 @@ export function ProfileForm() {
                               ? field.onChange([...currentValue, option.id])
                               : field.onChange(
                                   currentValue.filter(
-                                    (value) => value !== option.id
-                                  )
+                                    (value) => value !== option.id,
+                                  ),
                                 );
                           }}
                         />
@@ -427,8 +427,8 @@ export function ProfileForm() {
                               ? field.onChange([...currentValue, option.id])
                               : field.onChange(
                                   currentValue.filter(
-                                    (value) => value !== option.id
-                                  )
+                                    (value) => value !== option.id,
+                                  ),
                                 );
                           }}
                         />

@@ -1,11 +1,11 @@
 "use client";
 
-import * as React from "react";
-import { addDays, format, subDays, isSameDay } from "date-fns";
+import { addDays, format, isSameDay, subDays } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import * as React from "react";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 interface CalendarStripProps {
   selectedDate: Date;
@@ -36,7 +36,7 @@ export function CalendarStrip({
     <div
       className={cn(
         "flex items-center justify-between gap-1 md:gap-2",
-        className
+        className,
       )}
     >
       <Button
@@ -68,7 +68,7 @@ export function CalendarStrip({
                   !isSelected &&
                   "border-primary/20 bg-primary/5 text-primary",
                 // Hide first and last day on mobile (show 3 days), show all 5 on md+
-                (i === 0 || i === 4) && "hidden md:flex"
+                (i === 0 || i === 4) && "hidden md:flex",
               )}
             >
               <span className="text-[10px] font-medium uppercase tracking-wider opacity-80">
@@ -77,7 +77,7 @@ export function CalendarStrip({
               <span
                 className={cn(
                   "text-lg font-bold",
-                  isSelected ? "text-white" : ""
+                  isSelected ? "text-white" : "",
                 )}
               >
                 {format(date, "d")}

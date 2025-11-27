@@ -36,9 +36,7 @@ export default function ProgressPage() {
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold">{logs?.length || 0}</div>
-              <p className="text-sm text-secondary mt-1">
-                treinos completados
-              </p>
+              <p className="text-sm text-secondary mt-1">treinos completados</p>
             </CardContent>
           </Card>
 

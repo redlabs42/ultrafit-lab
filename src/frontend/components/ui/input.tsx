@@ -7,10 +7,7 @@ const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
     return (
       <input
         type={type}
-        className={cn(
-          "input-glass",
-          className,
-        )}
+        className={cn("input-glass", className)}
         ref={ref}
         {...props}
       />

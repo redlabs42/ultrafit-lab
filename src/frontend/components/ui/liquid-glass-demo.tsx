@@ -1,5 +1,7 @@
 "use client";
 
+import { HelpCircle, Moon, Sun, Zap } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -30,8 +32,6 @@ import {
 } from "@/components/ui/tooltip";
 import { useTheme } from "@/hooks/useTheme";
 import { useToast } from "@/hooks/useToast";
-import { HelpCircle, Moon, Sun, Zap } from "lucide-react";
-import { useEffect, useState } from "react";
 
 /**
  * Componente de demonstração do Liquid Glass Design System
@@ -67,6 +67,7 @@ export function LiquidGlassDemo() {
             </div>
             {mounted && (
               <button
+                type="button"
                 onClick={() => setTheme(isDark ? "light" : "dark")}
                 className="btn-liquid-secondary"
                 aria-label="Alternar tema"
@@ -85,13 +86,17 @@ export function LiquidGlassDemo() {
         <div className="glass-card p-8 mb-6">
           <h2 className="text-2xl font-semibold mb-4">Botões</h2>
           <div className="flex flex-wrap gap-3">
-            <button className="btn-liquid-primary">
+            <button type="button" className="btn-liquid-primary">
               <Zap className="h-4 w-4 mr-2 inline" />
               Primary Button
             </button>
-            <button className="btn-liquid-secondary">Secondary Button</button>
-            <button className="btn-liquid-ghost">Ghost Button</button>
-            <button className="btn-liquid-primary" disabled>
+            <button type="button" className="btn-liquid-secondary">
+              Secondary Button
+            </button>
+            <button type="button" className="btn-liquid-ghost">
+              Ghost Button
+            </button>
+            <button type="button" className="btn-liquid-primary" disabled>
               Disabled
             </button>
           </div>
@@ -178,7 +183,9 @@ export function LiquidGlassDemo() {
           <h2 className="text-2xl font-semibold mb-4">Dialog / Modal</h2>
           <Dialog>
             <DialogTrigger asChild>
-              <button className="btn-liquid-primary">Abrir Modal</button>
+              <button type="button" className="btn-liquid-primary">
+                Abrir Modal
+              </button>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
@@ -196,8 +203,12 @@ export function LiquidGlassDemo() {
                 />
               </div>
               <DialogFooter>
-                <button className="btn-liquid-secondary">Cancelar</button>
-                <button className="btn-liquid-primary">Confirmar</button>
+                <button type="button" className="btn-liquid-secondary">
+                  Cancelar
+                </button>
+                <button type="button" className="btn-liquid-primary">
+                  Confirmar
+                </button>
               </DialogFooter>
             </DialogContent>
           </Dialog>
@@ -341,6 +352,7 @@ export function LiquidGlassDemo() {
           <h2 className="text-2xl font-semibold mb-4">Toast Notifications</h2>
           <div className="flex flex-wrap gap-3">
             <button
+              type="button"
               className="btn-liquid-primary"
               onClick={() => {
                 toast({
@@ -353,6 +365,7 @@ export function LiquidGlassDemo() {
               Toast Sucesso
             </button>
             <button
+              type="button"
               className="btn-liquid-secondary"
               onClick={() => {
                 toast({
@@ -365,6 +378,7 @@ export function LiquidGlassDemo() {
               Toast Aviso
             </button>
             <button
+              type="button"
               className="btn-liquid-ghost"
               onClick={() => {
                 toast({
@@ -386,7 +400,9 @@ export function LiquidGlassDemo() {
             <div className="flex gap-4">
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <button className="btn-liquid-primary">Hover me</button>
+                  <button type="button" className="btn-liquid-primary">
+                    Hover me
+                  </button>
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Tooltip com glass effect!</p>
@@ -395,7 +411,10 @@ export function LiquidGlassDemo() {
 
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <button className="p-2 rounded-lg hover:bg-surface transition-colors">
+                  <button
+                    type="button"
+                    className="p-2 rounded-lg hover:bg-surface transition-colors"
+                  >
                     <HelpCircle className="h-5 w-5 text-secondary" />
                   </button>
                 </TooltipTrigger>

@@ -1,3 +1,5 @@
+import { Apple, ChevronRight, Dumbbell, TrendingUp, Zap } from "lucide-react";
+import Link from "next/link";
 import {
   Card,
   CardContent,
@@ -5,8 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Apple, ChevronRight, Dumbbell, TrendingUp, Zap } from "lucide-react";
-import Link from "next/link";
 
 export function QuickActions() {
   return (

@@ -1,6 +1,6 @@
+import type { LucideIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import type { LucideIcon } from "lucide-react";
 
 interface StatsCardProps {
   title: string;
@@ -62,19 +62,19 @@ export function StatsCard({
     <Card
       className={cn(
         "group relative overflow-hidden border-0 bg-white/5 backdrop-blur-xl shadow-2xl transition-all duration-500 hover:scale-[1.02] rounded-2xl sm:rounded-3xl",
-        className
+        className,
       )}
     >
       <div
         className={cn(
           "absolute inset-0 bg-linear-to-br via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500",
-          styles.gradient
+          styles.gradient,
         )}
       />
       <div
         className={cn(
           "absolute top-0 right-0 w-24 h-24 sm:w-32 sm:h-32 rounded-full blur-3xl transition-colors duration-500",
-          styles.bg
+          styles.bg,
         )}
       />
 
@@ -86,13 +86,13 @@ export function StatsCard({
           <div
             className={cn(
               "absolute inset-0 rounded-xl sm:rounded-2xl blur-md opacity-50 group-hover:opacity-75 transition-opacity bg-linear-to-br",
-              styles.gradient
+              styles.gradient,
             )}
           />
           <div
             className={cn(
               "relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-xl bg-linear-to-br",
-              styles.gradient
+              styles.gradient,
             )}
           >
             <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
@@ -105,7 +105,7 @@ export function StatsCard({
           <div
             className={cn(
               "text-2xl sm:text-4xl font-black bg-clip-text text-transparent bg-linear-to-br",
-              styles.gradient
+              styles.gradient,
             )}
           >
             {value}
@@ -127,13 +127,13 @@ export function StatsCard({
               <div
                 className={cn(
                   "relative h-1.5 sm:h-2 rounded-full overflow-hidden",
-                  styles.bg
+                  styles.bg,
                 )}
               >
                 <div
                   className={cn(
                     "relative h-full transition-all duration-1000 shadow-lg rounded-full bg-linear-to-r",
-                    styles.gradient
+                    styles.gradient,
                   )}
                   style={{ width: `${Math.min(Math.max(progress, 0), 100)}%` }}
                 />

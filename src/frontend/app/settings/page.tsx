@@ -43,7 +43,9 @@ export default function SettingsPage() {
     <DashboardLayout>
       <div className="max-w-4xl mx-auto space-y-8">
         <div>
-          <h1 className="text-4xl font-bold tracking-tight mb-2">Configurações</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-2">
+            Configurações
+          </h1>
           <p className="text-secondary text-lg">
             Gerencie suas preferências e configurações
           </p>
@@ -51,7 +53,10 @@ export default function SettingsPage() {
 
         <div className="grid gap-4">
           {settingsSections.map((section) => (
-            <Card key={section.href} className="hover-lift cursor-pointer transition-all">
+            <Card
+              key={section.href}
+              className="hover-lift cursor-pointer transition-all"
+            >
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">

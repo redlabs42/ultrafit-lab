@@ -1,3 +1,4 @@
+import { Calendar, ChevronRight, Plus, Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -6,7 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Calendar, ChevronRight, Plus, Target } from "lucide-react";
 
 export function NextWorkoutCard() {
   return (

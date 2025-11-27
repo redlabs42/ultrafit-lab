@@ -1,21 +1,21 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
-import { Check, Zap, Star, Shield, Users, Crown } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { DashboardLayout } from "@/components/layout/DashboardLayout";
-import { useState } from "react";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
+import { Check, Crown, Shield, Star, Users, Zap } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useSubscriptionPlans } from "@/hooks/useSubscription";
+import { useState } from "react";
 import { toast } from "sonner";
+import { DashboardLayout } from "@/components/layout/DashboardLayout";
+import { Badge } from "@/components/ui/badge";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { useSubscriptionPlans } from "@/hooks/useSubscription";
+import { cn } from "@/lib/utils";
 
 export default function SubscriptionPage() {
   const router = useRouter();
   const { data: apiPlans, isLoading } = useSubscriptionPlans();
   const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">(
-    "monthly"
+    "monthly",
   );
 
   const calculatePrice = (basePrice: number) => {
@@ -51,7 +51,7 @@ export default function SubscriptionPage() {
 
     const interval = billingCycle === "annual" ? "yearly" : "monthly";
     const apiPlan = apiPlans.find(
-      (p) => p.name === plan.name && p.interval === interval
+      (p) => p.name === plan.name && p.interval === interval,
     );
 
     if (apiPlan) {
@@ -169,7 +169,7 @@ export default function SubscriptionPage() {
                 "text-sm font-medium cursor-pointer transition-colors",
                 billingCycle === "monthly"
                   ? "text-foreground"
-                  : "text-muted-foreground"
+                  : "text-muted-foreground",
               )}
             >
               Mensal
@@ -187,7 +187,7 @@ export default function SubscriptionPage() {
                 "text-sm font-medium cursor-pointer transition-colors flex items-center gap-2",
                 billingCycle === "annual"
                   ? "text-foreground"
-                  : "text-muted-foreground"
+                  : "text-muted-foreground",
               )}
             >
               Anual
@@ -213,7 +213,7 @@ export default function SubscriptionPage() {
                   "relative p-6 flex flex-col h-full transition-all duration-300",
                   plan.popular
                     ? "glass-card border-primary/50 shadow-glass-lg scale-105 z-10"
-                    : "glass-card hover-lift"
+                    : "glass-card hover-lift",
                 )}
               >
                 {plan.popular && (
@@ -230,7 +230,7 @@ export default function SubscriptionPage() {
                       "w-10 h-10 rounded-xl flex items-center justify-center mb-4",
                       plan.variant === "primary"
                         ? "bg-primary/10 text-primary"
-                        : "bg-surface text-foreground"
+                        : "bg-surface text-foreground",
                     )}
                   >
                     <plan.icon className="w-5 h-5" />
@@ -286,7 +286,7 @@ export default function SubscriptionPage() {
                     isLoading &&
                       !isFree &&
                       plan.name !== "Enterprise" &&
-                      "opacity-50 cursor-not-allowed"
+                      "opacity-50 cursor-not-allowed",
                   )}
                 >
                   {isLoading && !isFree && plan.name !== "Enterprise"

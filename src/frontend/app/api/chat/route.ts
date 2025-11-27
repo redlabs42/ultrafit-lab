@@ -5,11 +5,11 @@ import { convertToModelMessages, streamText, type UIMessage } from "ai";
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
-	const { messages }: { messages: UIMessage[] } = await req.json();
+  const { messages }: { messages: UIMessage[] } = await req.json();
 
-	const result = streamText({
-		model: google("gemini-2.5-flash"),
-		system: `Você é um assistente virtual inteligente da Ultrafit Lab, uma plataforma de IA para nutrição e treinos de academia.
+  const result = streamText({
+    model: google("gemini-2.5-flash"),
+    system: `Você é um assistente virtual inteligente da Ultrafit Lab, uma plataforma de IA para nutrição e treinos de academia.
     
     Sobre a Ultrafit Lab:
     - Plataforma que substitui nutricionista e personal trainer com inteligência artificial
@@ -33,8 +33,8 @@ export async function POST(req: Request) {
     5. Responda sempre em Português do Brasil
     6. Quando relevante, mencione benefícios da IA vs. profissionais tradicionais
     `,
-		messages: convertToModelMessages(messages),
-	});
+    messages: convertToModelMessages(messages),
+  });
 
-	return result.toUIMessageStreamResponse();
+  return result.toUIMessageStreamResponse();
 }

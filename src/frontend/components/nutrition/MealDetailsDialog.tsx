@@ -1,6 +1,10 @@
 "use client";
 
+import { ChefHat, Clock, Flame, Utensils } from "lucide-react";
 import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Dialog,
   DialogContent,
@@ -9,12 +13,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Badge } from "@/components/ui/badge";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Button } from "@/components/ui/button";
-import { Clock, Flame, ChefHat, Utensils } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { Meal } from "@/types";
 
 interface MealDetailsDialogProps {
@@ -189,7 +189,7 @@ export function MealDetailsDialog({ meal, children }: MealDetailsDialogProps) {
                                 {step}
                               </p>
                             </div>
-                          )
+                          ),
                       )}
                     </div>
                   </div>

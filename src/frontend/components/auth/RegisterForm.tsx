@@ -55,7 +55,9 @@ export function RegisterForm() {
   return (
     <Card className="w-full">
       <CardHeader className="text-center">
-        <CardTitle className="text-3xl font-bold mb-2">Comece sua jornada</CardTitle>
+        <CardTitle className="text-3xl font-bold mb-2">
+          Comece sua jornada
+        </CardTitle>
         <CardDescription className="text-base">
           Crie sua conta para começar sua transformação fitness
         </CardDescription>
@@ -103,7 +105,9 @@ export function RegisterForm() {
               {...register("password")}
             />
             {errors.password && (
-              <p className="text-sm text-destructive">{errors.password.message}</p>
+              <p className="text-sm text-destructive">
+                {errors.password.message}
+              </p>
             )}
           </div>
 
@@ -137,7 +141,10 @@ export function RegisterForm() {
 
           <p className="text-sm text-center text-muted-foreground">
             Já tem uma conta?{" "}
-            <Link href="/login" className="text-primary hover:underline font-semibold">
+            <Link
+              href="/login"
+              className="text-primary hover:underline font-semibold"
+            >
               Entrar
             </Link>
           </p>

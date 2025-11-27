@@ -1,16 +1,16 @@
 "use client";
 
-import { Suspense, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { PaymentForm } from "@/components/payments/PaymentForm";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Badge } from "@/components/ui/badge";
 import { useSubscribe, useSubscriptionPlans } from "@/hooks/useSubscription";
+import { formatCurrency } from "@/lib/utils";
 import { paymentsService } from "@/services/payments";
-import { formatCurrency, cn } from "@/lib/utils";
-import { ShieldCheck, CheckCircle2 } from "lucide-react";
+import { CheckCircle2, ShieldCheck } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useState } from "react";
 import { toast } from "sonner";
 
 function CheckoutContent() {
@@ -52,7 +52,7 @@ function CheckoutContent() {
           },
         }
       );
-    } catch (error) {
+    } catch (_error) {
       toast.error("Erro ao adicionar cartão de crédito.");
     }
   };
@@ -75,7 +75,7 @@ function CheckoutContent() {
         // Fallback or error if no PIX data returned
         toast.error("Erro ao gerar PIX. Tente novamente.");
       }
-    } catch (error) {
+    } catch (_error) {
       toast.error("Erro ao processar pagamento via PIX.");
     }
   };
@@ -109,6 +109,7 @@ function CheckoutContent() {
                 O plano selecionado não existe ou não está mais disponível.
               </p>
               <button
+                type="button"
                 onClick={() => router.push("/subscription")}
                 className="mt-4 btn-liquid-ghost"
               >
@@ -173,7 +174,11 @@ function CheckoutContent() {
                   </h4>
                   <ul className="space-y-2">
                     {selectedPlan.features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm">
+                      <li
+                        // biome-ignore lint/suspicious/noArrayIndexKey: features order is stable
+                        key={`${feature}-${i}`}
+                        className="flex items-start gap-2 text-sm"
+                      >
                         <CheckCircle2 className="w-4 h-4 text-success shrink-0 mt-0.5" />
                         <span className="text-muted-foreground">{feature}</span>
                       </li>

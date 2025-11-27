@@ -6,7 +6,7 @@ export const nutritionService = {
   // Get all nutrition plans
   async getPlans(): Promise<NutritionPlan[]> {
     const response = await apiClient.get<NutritionPlan[]>(
-      ENDPOINTS.NUTRITION.PLANS
+      ENDPOINTS.NUTRITION.PLANS,
     );
     return response.data;
   },
@@ -14,7 +14,7 @@ export const nutritionService = {
   // Get specific plan
   async getPlan(planId: string): Promise<NutritionPlan> {
     const response = await apiClient.get<NutritionPlan>(
-      ENDPOINTS.NUTRITION.PLAN(planId)
+      ENDPOINTS.NUTRITION.PLAN(planId),
     );
     return response.data;
   },
@@ -43,7 +43,7 @@ export const nutritionService = {
   }): Promise<NutritionPlan> {
     const response = await apiClient.post<NutritionPlan>(
       ENDPOINTS.NUTRITION.PLANS,
-      data
+      data,
     );
     return response.data;
   },
@@ -80,11 +80,11 @@ export const nutritionService = {
   // Update plan
   async updatePlan(
     planId: string,
-    data: Partial<NutritionPlan>
+    data: Partial<NutritionPlan>,
   ): Promise<NutritionPlan> {
     const response = await apiClient.patch<NutritionPlan>(
       ENDPOINTS.NUTRITION.PLAN(planId),
-      data
+      data,
     );
     return response.data;
   },

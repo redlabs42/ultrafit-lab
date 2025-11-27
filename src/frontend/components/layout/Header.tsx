@@ -1,13 +1,13 @@
 "use client";
 
+import { Moon, Sparkles, Sun } from "lucide-react";
+import Link from "next/link";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { NotificationBell } from "@/components/navigation/NotificationBell";
 import { UserMenu } from "@/components/navigation/UserMenu";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/hooks/useTheme";
 import { useAuthStore } from "@/store";
-import { Moon, Sparkles, Sun } from "lucide-react";
-import Link from "next/link";
 
 export function Header() {
   const { isAuthenticated } = useAuthStore();

@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
 import { Check, X } from "lucide-react";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Planos e Preços - Ultrafit Lab",

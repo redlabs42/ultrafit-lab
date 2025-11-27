@@ -1,10 +1,10 @@
 "use client";
 
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
+import { Chat } from "@/components/chat";
+import { DashboardTopBar } from "@/components/layout/DashboardTopBar";
 import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
-import { DashboardTopBar } from "@/components/layout/DashboardTopBar";
-import { Chat } from "@/components/chat";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;

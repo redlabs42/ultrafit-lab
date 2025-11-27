@@ -1,13 +1,3 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
-import { useAuthStore } from "@/store";
 import {
   CreditCard,
   Dumbbell,
@@ -22,6 +12,16 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
+import { useAuthStore } from "@/store";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -89,7 +89,7 @@ export function MobileNav() {
                       isActive
                         ? "bg-primary/10 text-primary shadow-sm"
                         : "text-muted-foreground hover:bg-white/5 hover:text-foreground",
-                      "animate-in slide-in-from-left-2 fade-in duration-300"
+                      "animate-in slide-in-from-left-2 fade-in duration-300",
                     )}
                     style={{ animationDelay: `${index * 50}ms` }}
                   >
@@ -98,7 +98,7 @@ export function MobileNav() {
                         "h-5 w-5 transition-colors",
                         isActive
                           ? "text-primary"
-                          : "text-muted-foreground group-hover:text-foreground"
+                          : "text-muted-foreground group-hover:text-foreground",
                       )}
                     />
                     {item.name}

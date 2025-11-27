@@ -1,5 +1,9 @@
 "use client";
 
+import { format } from "date-fns";
+import { Plus } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { CalendarStrip } from "@/components/nutrition/CalendarStrip";
 import { DailyProgress } from "@/components/nutrition/DailyProgress";
@@ -18,10 +22,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useActivePlan } from "@/hooks/useNutrition";
 import type { Macros } from "@/types";
-import { format } from "date-fns";
-import { Plus } from "lucide-react";
-import Link from "next/link";
-import { useEffect, useState } from "react";
 
 export default function NutritionPage() {
   const { data: activePlan, isLoading } = useActivePlan();
@@ -33,7 +33,7 @@ export default function NutritionPage() {
   // Load consumed meals from local storage history
   useEffect(() => {
     const history = JSON.parse(
-      localStorage.getItem("consumed-meals-history") || "{}"
+      localStorage.getItem("consumed-meals-history") || "{}",
     );
     setConsumedMealIds(history[dateKey] || []);
   }, [dateKey]);
@@ -47,7 +47,7 @@ export default function NutritionPage() {
 
     // Save to history immediately
     const history = JSON.parse(
-      localStorage.getItem("consumed-meals-history") || "{}"
+      localStorage.getItem("consumed-meals-history") || "{}",
     );
     history[dateKey] = newIds;
     localStorage.setItem("consumed-meals-history", JSON.stringify(history));
@@ -64,7 +64,7 @@ export default function NutritionPage() {
             carbs: acc.carbs + meal.macros.carbs,
             fat: acc.fat + meal.macros.fat,
           }),
-          { calories: 0, protein: 0, carbs: 0, fat: 0 }
+          { calories: 0, protein: 0, carbs: 0, fat: 0 },
         )
     : { calories: 0, protein: 0, carbs: 0, fat: 0 };
 

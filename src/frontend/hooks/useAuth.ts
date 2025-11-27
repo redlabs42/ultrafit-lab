@@ -172,7 +172,7 @@ export function useAuth() {
 
               setAuth(authUser);
               return newSession;
-            } catch (refreshError) {
+            } catch (_refreshError) {
               // If refresh fails, logout
               setLoading(false);
               logoutStore();

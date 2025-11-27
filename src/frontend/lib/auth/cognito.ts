@@ -16,7 +16,9 @@ let userPool: CognitoUserPool | null = null;
 const getUserPool = (): CognitoUserPool => {
   if (!userPool) {
     if (!poolData.UserPoolId || !poolData.ClientId) {
-      throw new Error("Cognito configuration is missing. Please set NEXT_PUBLIC_COGNITO_USER_POOL_ID and NEXT_PUBLIC_COGNITO_USER_POOL_CLIENT_ID environment variables.");
+      throw new Error(
+        "Cognito configuration is missing. Please set NEXT_PUBLIC_COGNITO_USER_POOL_ID and NEXT_PUBLIC_COGNITO_USER_POOL_CLIENT_ID environment variables.",
+      );
     }
     userPool = new CognitoUserPool(poolData);
   }

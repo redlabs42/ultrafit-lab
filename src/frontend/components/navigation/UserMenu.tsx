@@ -1,14 +1,14 @@
 "use client";
 
 import {
+  Apple,
+  CreditCard,
+  Dumbbell,
   LayoutDashboard,
   LogOut,
   Settings,
-  User,
-  CreditCard,
   TrendingUp,
-  Dumbbell,
-  Apple
+  User,
 } from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -41,7 +41,7 @@ export function UserMenu() {
           className={cn(
             "group relative flex items-center gap-2 rounded-full",
             "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-            "transition-all duration-300 hover:scale-105"
+            "transition-all duration-300 hover:scale-105",
           )}
         >
           <div className="relative">
@@ -63,7 +63,7 @@ export function UserMenu() {
         className={cn(
           "w-64 p-2",
           "bg-background/95 backdrop-blur-xl border-border/50",
-          "shadow-xl shadow-black/10"
+          "shadow-xl shadow-black/10",
         )}
       >
         <DropdownMenuLabel className="p-3">
@@ -76,7 +76,9 @@ export function UserMenu() {
             </Avatar>
             <div className="flex flex-col space-y-1 flex-1 min-w-0">
               <p className="text-sm font-semibold truncate">{user?.name}</p>
-              <p className="text-xs text-muted-foreground truncate">{user?.email}</p>
+              <p className="text-xs text-muted-foreground truncate">
+                {user?.email}
+              </p>
             </div>
           </div>
         </DropdownMenuLabel>
@@ -162,7 +164,7 @@ export function UserMenu() {
           className={cn(
             "cursor-pointer flex items-center gap-3 px-3 py-2 rounded-md",
             "text-destructive hover:bg-destructive/10 hover:text-destructive",
-            "transition-colors"
+            "transition-colors",
           )}
         >
           <LogOut className="h-4 w-4" />

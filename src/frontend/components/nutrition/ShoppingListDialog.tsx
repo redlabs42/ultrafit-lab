@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import { Copy, ShoppingCart } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Dialog,
   DialogContent,
@@ -11,10 +13,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Checkbox } from "@/components/ui/checkbox";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { toast } from "sonner";
-import type { NutritionPlan, Food } from "@/types";
+import type { Food, NutritionPlan } from "@/types";
 
 interface ShoppingListDialogProps {
   plan: NutritionPlan;
@@ -37,31 +37,34 @@ export function ShoppingListDialog({ plan }: ShoppingListDialogProps) {
     const allFoods: Food[] = plan.meals.flatMap((meal) => meal.foods);
 
     // Simple aggregation by name and unit
-    const aggregated = allFoods.reduce((acc, food) => {
-      const key = `${food.name.toLowerCase()}-${food.unit.toLowerCase()}`;
-      if (!acc[key]) {
-        acc[key] = {
-          id: key,
-          name: food.name,
-          quantity: 0,
-          unit: food.unit,
-          checked: false,
-        };
-      }
-      acc[key].quantity += food.quantity;
-      return acc;
-    }, {} as Record<string, ShoppingItem>);
+    const aggregated = allFoods.reduce(
+      (acc, food) => {
+        const key = `${food.name.toLowerCase()}-${food.unit.toLowerCase()}`;
+        if (!acc[key]) {
+          acc[key] = {
+            id: key,
+            name: food.name,
+            quantity: 0,
+            unit: food.unit,
+            checked: false,
+          };
+        }
+        acc[key].quantity += food.quantity;
+        return acc;
+      },
+      {} as Record<string, ShoppingItem>,
+    );
 
     setItems(
-      Object.values(aggregated).sort((a, b) => a.name.localeCompare(b.name))
+      Object.values(aggregated).sort((a, b) => a.name.localeCompare(b.name)),
     );
   };
 
   const toggleItem = (id: string) => {
     setItems((prev) =>
       prev.map((item) =>
-        item.id === id ? { ...item, checked: !item.checked } : item
-      )
+        item.id === id ? { ...item, checked: !item.checked } : item,
+      ),
     );
   };
 
@@ -71,7 +74,7 @@ export function ShoppingListDialog({ plan }: ShoppingListDialogProps) {
         (item) =>
           `${item.checked ? "[x]" : "[ ]"} ${item.name}: ${item.quantity}${
             item.unit
-          }`
+          }`,
       )
       .join("\n");
     navigator.clipboard.writeText(text);

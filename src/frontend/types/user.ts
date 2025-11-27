@@ -6,6 +6,11 @@ export interface User {
   role: "user" | "admin";
   createdAt: string;
   updatedAt: string;
+  birthDate?: string;
+  gender?: "male" | "female" | "other";
+  height?: number; // cm
+  weight?: number; // kg
+  activityLevel?: "sedentary" | "light" | "moderate" | "active" | "very_active";
 }
 
 export interface UserProfile extends User {

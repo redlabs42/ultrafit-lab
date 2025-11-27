@@ -1,12 +1,5 @@
 "use client";
 
-import { GenerationProgress } from "@/components/ai/GenerationProgress";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useGeneratePlan } from "@/hooks/useNutrition";
-import { useAuthStore } from "@/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { differenceInYears } from "date-fns";
 import { AlertCircle, Sparkles, User } from "lucide-react";
@@ -14,6 +7,13 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { GenerationProgress } from "@/components/ai/GenerationProgress";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useGeneratePlan } from "@/hooks/useNutrition";
+import { useAuthStore } from "@/store";
 
 const generateSchema = z.object({
   goal: z.enum(["weight_loss", "muscle_gain", "maintenance"]),
@@ -43,7 +43,7 @@ export function GeneratePlanForm({ onSuccess }: GeneratePlanFormProps) {
     const hasActivityLevel = !!user?.activityLevel;
 
     setIsProfileComplete(
-      hasHeight && hasWeight && hasGender && hasBirthDate && hasActivityLevel
+      hasHeight && hasWeight && hasGender && hasBirthDate && hasActivityLevel,
     );
   }, [user]);
 

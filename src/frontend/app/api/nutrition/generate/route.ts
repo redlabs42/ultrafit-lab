@@ -40,7 +40,7 @@ const nutritionPlanSchema = z.object({
         carbs: z.number(),
         fat: z.number(),
       }),
-    })
+    }),
   ),
   status: z.literal("active"),
 });
@@ -238,7 +238,7 @@ IMPORTANTE:
         {
           status: 400,
           headers: { "Content-Type": "application/json", ...corsHeaders },
-        }
+        },
       );
     }
 
@@ -252,7 +252,7 @@ IMPORTANTE:
       {
         status: 500,
         headers: { "Content-Type": "application/json", ...corsHeaders },
-      }
+      },
     );
   }
 }

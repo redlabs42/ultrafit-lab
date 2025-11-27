@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Check, Copy, CreditCard, MapPin, QrCode, User } from "lucide-react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
@@ -15,7 +16,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CreditCard, QrCode, Copy, Check, User, MapPin } from "lucide-react";
 
 const creditCardSchema = z.object({
   cardNumber: z.string().min(16, "Número do cartão inválido"),
@@ -54,8 +54,8 @@ export function PaymentForm({
   pixCode,
   pixQrCodeUrl,
 }: PaymentFormProps) {
-  const [paymentMethod, setPaymentMethod] = useState<"credit_card" | "pix">(
-    "credit_card"
+  const [_paymentMethod, setPaymentMethod] = useState<"credit_card" | "pix">(
+    "credit_card",
   );
   const [copied, setCopied] = useState(false);
 
