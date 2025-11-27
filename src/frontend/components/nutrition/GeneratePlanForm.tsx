@@ -1,15 +1,19 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Sparkles } from "lucide-react";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
 import { GenerationProgress } from "@/components/ai/GenerationProgress";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useGeneratePlan } from "@/hooks/useNutrition";
+import { useAuthStore } from "@/store";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { differenceInYears } from "date-fns";
+import { AlertCircle, Sparkles, User } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 
 const generateSchema = z.object({
   goal: z.enum(["weight_loss", "muscle_gain", "maintenance"]),
@@ -24,8 +28,24 @@ interface GeneratePlanFormProps {
 }
 
 export function GeneratePlanForm({ onSuccess }: GeneratePlanFormProps) {
+  const { user } = useAuthStore();
   const generateMutation = useGeneratePlan();
   const [progress, setProgress] = useState(0);
+  const [isProfileComplete, setIsProfileComplete] = useState(false);
+
+  useEffect(() => {
+    // Check if user has necessary profile data
+    // We check for height, weight, gender, and birthDate (to calc age)
+    const hasHeight = !!user?.height;
+    const hasWeight = !!user?.weight;
+    const hasGender = !!user?.gender;
+    const hasBirthDate = !!user?.birthDate;
+    const hasActivityLevel = !!user?.activityLevel;
+
+    setIsProfileComplete(
+      hasHeight && hasWeight && hasGender && hasBirthDate && hasActivityLevel
+    );
+  }, [user]);
 
   const {
     register,
@@ -39,6 +59,14 @@ export function GeneratePlanForm({ onSuccess }: GeneratePlanFormProps) {
   });
 
   const onSubmit = (data: GenerateFormData) => {
+    if (!user) return;
+
+    // Calculate age if birthDate is present
+    let age: number | undefined;
+    if (user.birthDate) {
+      age = differenceInYears(new Date(), new Date(user.birthDate));
+    }
+
     const payload = {
       goal: data.goal,
       dietaryRestrictions: data.dietaryRestrictions
@@ -47,6 +75,12 @@ export function GeneratePlanForm({ onSuccess }: GeneratePlanFormProps) {
       preferences: data.preferences
         ? data.preferences.split(",").map((s) => s.trim())
         : undefined,
+      // Pass profile data
+      age,
+      gender: user.gender,
+      height: user.height,
+      weight: user.weight,
+      activityLevel: user.activityLevel,
     };
 
     // Simulate progress
@@ -84,6 +118,41 @@ export function GeneratePlanForm({ onSuccess }: GeneratePlanFormProps) {
         title="Gerando Plano Nutricional"
         description="Nossa IA está criando um plano personalizado para você"
       />
+    );
+  }
+
+  if (!isProfileComplete) {
+    return (
+      <div className="space-y-6 py-4">
+        <Alert
+          variant="destructive"
+          className="bg-red-500/10 border-red-500/20 text-red-500"
+        >
+          <AlertCircle className="h-4 w-4" />
+          <AlertTitle>Perfil Incompleto</AlertTitle>
+          <AlertDescription>
+            Para gerar um plano nutricional preciso, precisamos que você
+            complete seu perfil com seus dados físicos (altura, peso, idade,
+            etc).
+          </AlertDescription>
+        </Alert>
+
+        <div className="flex flex-col items-center justify-center space-y-4 p-8 border-2 border-dashed border-border rounded-xl bg-surface/30">
+          <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
+            <User className="h-6 w-6 text-primary" />
+          </div>
+          <div className="text-center space-y-1">
+            <h3 className="font-semibold text-lg">Complete seu Perfil</h3>
+            <p className="text-sm text-secondary max-w-xs">
+              Adicione suas medidas e nível de atividade para que a IA possa
+              calcular suas necessidades calóricas.
+            </p>
+          </div>
+          <Button asChild>
+            <Link href="/profile">Ir para Perfil</Link>
+          </Button>
+        </div>
+      </div>
     );
   }
 

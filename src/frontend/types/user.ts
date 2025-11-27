@@ -16,6 +16,11 @@ export interface UserProfile extends User {
   weight?: number; // kg
   goals?: string[];
   activityLevel?: "sedentary" | "light" | "moderate" | "active" | "very_active";
+  dietaryRestrictions?: string[];
+  injuries?: string[];
+  equipment?: string[];
+  workoutFrequency?: number;
+  experienceLevel?: "beginner" | "intermediate" | "advanced";
   subscriptionStatus?: "active" | "inactive" | "trial" | "cancelled";
   subscriptionPlan?: string;
 }
