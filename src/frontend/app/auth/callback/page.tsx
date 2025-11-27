@@ -4,10 +4,10 @@ import { exchangeCodeForTokens } from "@/lib/auth/cognito";
 import { useAuthStore } from "@/store";
 import type { AuthUser, User } from "@/types";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import { toast } from "sonner";
 
-export default function AuthCallbackPage() {
+function AuthCallbackContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { setAuth, setLoading } = useAuthStore();
@@ -82,5 +82,21 @@ export default function AuthCallbackPage() {
         <p className="text-muted-foreground">Por favor, aguarde.</p>
       </div>
     </div>
+  );
+}
+
+export default function AuthCallbackPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center">
+          <div className="text-center">
+            <h2 className="text-2xl font-semibold mb-2">Carregando...</h2>
+          </div>
+        </div>
+      }
+    >
+      <AuthCallbackContent />
+    </Suspense>
   );
 }

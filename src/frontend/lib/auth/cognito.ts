@@ -17,7 +17,7 @@ const getUserPool = (): CognitoUserPool => {
   if (!userPool) {
     if (!poolData.UserPoolId || !poolData.ClientId) {
       throw new Error(
-        "Cognito configuration is missing. Please set NEXT_PUBLIC_COGNITO_USER_POOL_ID and NEXT_PUBLIC_COGNITO_USER_POOL_CLIENT_ID environment variables."
+        "Cognito configuration is missing. Please set NEXT_PUBLIC_COGNITO_USER_POOL_ID and NEXT_PUBLIC_COGNITO_USER_POOL_CLIENT_ID environment variables.",
       );
     }
     userPool = new CognitoUserPool(poolData);
@@ -78,7 +78,7 @@ export const signUp = (params: SignUpParams): Promise<CognitoUser> => {
         if (result?.user) {
           resolve(result.user);
         }
-      }
+      },
     );
   });
 };
@@ -157,7 +157,7 @@ export const getCurrentSession = (): Promise<CognitoUserSession> => {
         if (session) {
           resolve(session);
         }
-      }
+      },
     );
   });
 };
@@ -231,7 +231,7 @@ export const refreshSession = (): Promise<CognitoUserSession> => {
           }
           resolve(newSession);
         });
-      }
+      },
     );
   });
 };
@@ -255,7 +255,7 @@ export const federatedSignIn = (provider: string) => {
     : `https://${domain}`;
 
   const url = `${formattedDomain}/oauth2/authorize?identity_provider=${provider}&redirect_uri=${encodeURIComponent(
-    redirectUri
+    redirectUri,
   )}&response_type=${responseType}&client_id=${clientId}&scope=${scope}`;
 
   window.location.href = url;
@@ -263,7 +263,7 @@ export const federatedSignIn = (provider: string) => {
 
 // Exchange Code for Tokens
 export const exchangeCodeForTokens = async (
-  code: string
+  code: string,
 ): Promise<CognitoUserSession> => {
   const domain = process.env.NEXT_PUBLIC_COGNITO_DOMAIN;
   const clientId = process.env.NEXT_PUBLIC_COGNITO_USER_POOL_CLIENT_ID;

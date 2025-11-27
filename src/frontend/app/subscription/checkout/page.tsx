@@ -1,5 +1,9 @@
 "use client";
 
+import { CheckCircle2, ShieldCheck } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useState } from "react";
+import { toast } from "sonner";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { PaymentForm } from "@/components/payments/PaymentForm";
 import { Badge } from "@/components/ui/badge";
@@ -8,10 +12,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useSubscribe, useSubscriptionPlans } from "@/hooks/useSubscription";
 import { formatCurrency } from "@/lib/utils";
 import { paymentsService } from "@/services/payments";
-import { CheckCircle2, ShieldCheck } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react";
-import { toast } from "sonner";
 
 function CheckoutContent() {
   const router = useRouter();
@@ -47,10 +47,10 @@ function CheckoutContent() {
           },
           onError: () => {
             toast.error(
-              "Erro ao processar assinatura. Verifique os dados do cartão."
+              "Erro ao processar assinatura. Verifique os dados do cartão.",
             );
           },
-        }
+        },
       );
     } catch (_error) {
       toast.error("Erro ao adicionar cartão de crédito.");
@@ -63,7 +63,7 @@ function CheckoutContent() {
     try {
       const response = await paymentsService.subscribeWithPix(
         planId,
-        data.cpfCnpj
+        data.cpfCnpj,
       );
       if (response.pixCopyPaste && response.pixQrCode) {
         setPixData({

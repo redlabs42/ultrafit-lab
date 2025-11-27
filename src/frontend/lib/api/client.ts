@@ -1,6 +1,6 @@
+import axios, { type AxiosError, type AxiosInstance } from "axios";
 import { logger } from "@/lib/logger";
 import type { ApiError, ApiResponse } from "@/types";
-import axios, { type AxiosError, type AxiosInstance } from "axios";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
 
@@ -33,7 +33,7 @@ class ApiClient {
         }
         return config;
       },
-      (error) => Promise.reject(error)
+      (error) => Promise.reject(error),
     );
 
     // Response interceptor
@@ -58,7 +58,7 @@ class ApiClient {
         }
 
         return Promise.reject(this.handleError(error));
-      }
+      },
     );
   }
 
@@ -125,7 +125,7 @@ class ApiClient {
       logger.apiError(
         `API Error: ${apiError.message}`,
         error,
-        error.config?.url
+        error.config?.url,
       );
 
       return apiError;
@@ -155,7 +155,7 @@ class ApiClient {
   async post<T>(
     url: string,
     data?: unknown,
-    config?: object
+    config?: object,
   ): Promise<ApiResponse<T>> {
     console.log(`[ApiClient] POST ${url}`, data);
     const response = await this.client.post<ApiResponse<T>>(url, data, config);
@@ -165,7 +165,7 @@ class ApiClient {
   async put<T>(
     url: string,
     data?: unknown,
-    config?: object
+    config?: object,
   ): Promise<ApiResponse<T>> {
     const response = await this.client.put<ApiResponse<T>>(url, data, config);
     return response.data;
@@ -174,7 +174,7 @@ class ApiClient {
   async patch<T>(
     url: string,
     data?: unknown,
-    config?: object
+    config?: object,
   ): Promise<ApiResponse<T>> {
     const response = await this.client.patch<ApiResponse<T>>(url, data, config);
     return response.data;

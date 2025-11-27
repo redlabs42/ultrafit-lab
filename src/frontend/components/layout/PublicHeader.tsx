@@ -1,12 +1,12 @@
 "use client";
 
-import { ThemeToggle } from "@/components/ThemeToggle";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { Menu, Sparkles, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export function PublicHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -33,7 +33,7 @@ export function PublicHeader() {
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out",
         isScrolled
           ? "bg-background/80 backdrop-blur-md border-b border-border/40 py-4 shadow-sm"
-          : "bg-transparent py-4"
+          : "bg-transparent py-4",
       )}
     >
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
@@ -57,7 +57,7 @@ export function PublicHeader() {
                 "relative px-4 py-2 text-sm font-medium transition-all duration-300 rounded-full hover:bg-white/5 group overflow-hidden",
                 pathname === link.href
                   ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
+                  : "text-muted-foreground hover:text-foreground",
               )}
             >
               <span className="relative z-10">{link.label}</span>
@@ -110,7 +110,7 @@ export function PublicHeader() {
                 "text-lg font-medium py-3 px-4 rounded-xl transition-all",
                 pathname === link.href
                   ? "bg-primary/10 text-primary"
-                  : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
+                  : "text-muted-foreground hover:bg-white/5 hover:text-foreground",
               )}
               onClick={() => setIsMobileMenuOpen(false)}
             >

@@ -32,15 +32,15 @@ const workoutPlanSchema = z.object({
           reps: z.string(), // string to allow ranges like "10-12"
           rest: z.number(), // seconds
           notes: z.string().optional(),
-        })
+        }),
       ),
-    })
+    }),
   ),
   schedule: z.array(
     z.object({
       dayOfWeek: z.number(),
       workoutId: z.string(),
-    })
+    }),
   ),
 });
 
@@ -150,7 +150,7 @@ IMPORTANTE:
         {
           status: 400,
           headers: { "Content-Type": "application/json", ...corsHeaders },
-        }
+        },
       );
     }
 
@@ -164,7 +164,7 @@ IMPORTANTE:
       {
         status: 500,
         headers: { "Content-Type": "application/json", ...corsHeaders },
-      }
+      },
     );
   }
 }

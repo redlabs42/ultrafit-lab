@@ -1,12 +1,12 @@
 "use client";
 
-import { RegisterForm } from "@/components/auth/RegisterForm";
-import { Button } from "@/components/ui/button";
-import { useAuth } from "@/hooks/useAuth";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { RegisterForm } from "@/components/auth/RegisterForm";
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function RegisterPage() {
   const router = useRouter();
