@@ -1,17 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Plus } from "lucide-react";
-import Link from "next/link";
-import { format } from "date-fns";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
-import { DailyProgress } from "@/components/nutrition/DailyProgress";
-import { WaterTracker } from "@/components/nutrition/WaterTracker";
-import { ShoppingListDialog } from "@/components/nutrition/ShoppingListDialog";
 import { CalendarStrip } from "@/components/nutrition/CalendarStrip";
+import { DailyProgress } from "@/components/nutrition/DailyProgress";
 import { MealDetailsDialog } from "@/components/nutrition/MealDetailsDialog";
+import { ShoppingListDialog } from "@/components/nutrition/ShoppingListDialog";
+import { WaterTracker } from "@/components/nutrition/WaterTracker";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Card,
   CardContent,
@@ -19,9 +14,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useActivePlan } from "@/hooks/useNutrition";
 import type { Macros } from "@/types";
+import { format } from "date-fns";
+import { Plus } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function NutritionPage() {
   const { data: activePlan, isLoading } = useActivePlan();
@@ -276,7 +276,7 @@ export default function NutritionPage() {
             <Button asChild className="flex-1 md:flex-none">
               <Link href="/nutrition/generate">
                 <Plus className="mr-2 h-4 w-4" />
-                Gerar Plano com IA
+                Gerar Plano Smart
               </Link>
             </Button>
           </div>

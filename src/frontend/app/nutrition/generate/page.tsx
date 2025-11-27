@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { GeneratePlanForm } from "@/components/nutrition/GeneratePlanForm";
 import {
@@ -10,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useRouter } from "next/navigation";
 
 export default function GenerateNutritionPage() {
   const router = useRouter();
@@ -26,7 +26,8 @@ export default function GenerateNutritionPage() {
             Gerar Plano Nutricional
           </h1>
           <p className="text-secondary text-lg">
-            Use IA para criar um plano personalizado baseado nos seus objetivos
+            Use nossa tecnologia Smart para criar um plano personalizado baseado
+            nos seus objetivos
           </p>
         </div>
 

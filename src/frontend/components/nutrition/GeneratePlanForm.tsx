@@ -116,7 +116,7 @@ export function GeneratePlanForm({ onSuccess }: GeneratePlanFormProps) {
         isGenerating={generateMutation.isPending}
         progress={progress}
         title="Gerando Plano Nutricional"
-        description="Nossa IA está criando um plano personalizado para você"
+        description="Nosso sistema está criando um plano personalizado para você"
       />
     );
   }
@@ -206,7 +206,7 @@ export function GeneratePlanForm({ onSuccess }: GeneratePlanFormProps) {
 
       <Button type="submit" className="w-full">
         <Sparkles className="mr-2 h-4 w-4" />
-        Gerar Plano com IA
+        Gerar Plano Smart
       </Button>
     </form>
   );

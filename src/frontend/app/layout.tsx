@@ -1,8 +1,8 @@
+import { Toaster } from "@/components/ui/toaster";
+import { Providers } from "@/lib/providers";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "@/components/ui/toaster";
-import { Providers } from "@/lib/providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,17 +15,25 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ultrafit Lab - Seu Personal Trainer com IA",
+  title: "Ultrafit Lab - Seu Personal Trainer Digital",
   description:
-    "Planos personalizados de treino e nutrição com inteligência artificial",
-  keywords: ["fitness", "treino", "nutrição", "IA", "personal trainer"],
+    "Planos personalizados de treino e nutrição com tecnologia avançada para alcançar seus objetivos.",
+  keywords: [
+    "fitness",
+    "treino",
+    "nutrição",
+    "smart training",
+    "personal trainer",
+  ],
   authors: [{ name: "Ultrafit Lab" }],
   openGraph: {
-    title: "Ultrafit Lab - Seu Personal Trainer com IA",
-    description:
-      "Planos personalizados de treino e nutrição com inteligência artificial",
     type: "website",
     locale: "pt_BR",
+    url: "https://ultrafit-lab.vercel.app",
+    title: "Ultrafit Lab - Seu Personal Trainer Digital",
+    description:
+      "Planos personalizados de treino e nutrição com tecnologia avançada para alcançar seus objetivos.",
+    siteName: "Ultrafit Lab",
   },
   twitter: {
     card: "summary_large_image",

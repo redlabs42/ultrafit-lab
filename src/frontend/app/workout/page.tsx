@@ -1,7 +1,5 @@
 "use client";
 
-import { Calendar, Plus, TrendingUp } from "lucide-react";
-import Link from "next/link";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,6 +12,8 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { WorkoutCalendar } from "@/components/workout/WorkoutCalendar";
 import { useActivePlan } from "@/hooks/useWorkout";
+import { Calendar, Plus, TrendingUp } from "lucide-react";
+import Link from "next/link";
 
 export default function WorkoutPage() {
   const { data: activePlan, isLoading } = useActivePlan();
@@ -31,7 +31,7 @@ export default function WorkoutPage() {
           <Button asChild>
             <Link href="/workout/generate">
               <Plus className="mr-2 h-4 w-4" />
-              Gerar Plano com IA
+              Gerar Plano Smart
             </Link>
           </Button>
         </div>
