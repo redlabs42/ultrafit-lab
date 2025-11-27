@@ -1,3 +1,5 @@
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Activity,
   CheckCircle2,
@@ -10,14 +12,12 @@ import {
   Zap,
 } from "lucide-react";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
-    <div className="min-h-screen mesh-gradient">
+    <div className="min-h-screen mesh-gradient bg-noise">
       {/* Hero Section */}
-      <main className="flex min-h-screen flex-col items-center justify-center p-6 md:p-12 relative overflow-hidden">
+      <main className="flex min-h-screen flex-col items-center justify-center pt-24 px-6 pb-6 md:p-12 relative overflow-hidden">
         {/* Background Elements */}
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl -z-10 animate-pulse-slow" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl -z-10 animate-pulse-slow delay-1000" />
@@ -26,7 +26,7 @@ export default function Home() {
           {/* Badge de destaque */}
           <Badge
             variant="outline"
-            className="mb-4 py-2 px-4 bg-surface/50 backdrop-blur-md border-primary/30 text-primary animate-float"
+            className="mb-4 py-2 px-4 bg-surface/50 border-primary/30 text-primary-foreground bg-primary/20 animate-float backdrop-blur-md"
           >
             <Sparkles className="h-3 w-3 mr-2" />A Evolução do Personal Training
           </Badge>
@@ -35,9 +35,7 @@ export default function Home() {
           <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-tight">
             <span className="text-foreground">Treino Inteligente.</span>
             <br />
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-primary via-accent to-primary bg-300% animate-gradient">
-              Resultados Reais.
-            </span>
+            <span className="text-premium-gradient">Resultados Reais.</span>
           </h1>
 
           {/* Subtítulo */}
@@ -53,11 +51,7 @@ export default function Home() {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 mt-8 w-full sm:w-auto">
-            <Button
-              asChild
-              size="lg"
-              className="h-14 px-8 text-lg hover-scale shadow-lg shadow-primary/25"
-            >
+            <Button asChild size="lg" className="h-14 px-8 text-lg btn-premium">
               <Link href="/register">
                 <Zap className="h-5 w-5 mr-2" />
                 Começar Agora
@@ -87,7 +81,7 @@ export default function Home() {
       </main>
 
       {/* Features Grid */}
-      <section className="py-24 px-6 md:px-12 bg-surface/30 backdrop-blur-sm">
+      <section className="py-24 px-6 md:px-12 bg-surface/30 relative">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-6">
@@ -101,7 +95,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Feature 1 */}
-            <div className="glass-card hover-lift p-8 text-left group">
+            <div className="textured-card bg-noise hover-lift p-8 text-left group border-primary/10">
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/10 mb-6 group-hover:bg-primary/20 transition-colors">
                 <Activity className="h-7 w-7 text-primary" />
               </div>
@@ -114,7 +108,7 @@ export default function Home() {
             </div>
 
             {/* Feature 2 */}
-            <div className="glass-card hover-lift p-8 text-left group">
+            <div className="textured-card bg-noise hover-lift p-8 text-left group border-primary/10">
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-accent/10 mb-6 group-hover:bg-accent/20 transition-colors">
                 <TrendingUp className="h-7 w-7 text-accent" />
               </div>
@@ -127,7 +121,7 @@ export default function Home() {
             </div>
 
             {/* Feature 3 */}
-            <div className="glass-card hover-lift p-8 text-left group">
+            <div className="textured-card bg-noise hover-lift p-8 text-left group border-primary/10">
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-success/10 mb-6 group-hover:bg-success/20 transition-colors">
                 <Target className="h-7 w-7 text-success" />
               </div>
@@ -144,7 +138,7 @@ export default function Home() {
 
       {/* Social Proof / Stats */}
       <section className="py-24 px-6 md:px-12 relative">
-        <div className="max-w-7xl mx-auto glass-card p-12 md:p-16 rounded-3xl border-primary/20 bg-linear-to-br from-surface/80 to-surface/40">
+        <div className="max-w-7xl mx-auto textured-card bg-noise p-12 md:p-16 rounded-3xl border-primary/20 bg-linear-to-br from-surface/80 to-surface/40">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center divide-y md:divide-y-0 md:divide-x divide-border/50">
             <div className="p-4">
               <div className="text-5xl md:text-6xl font-bold mb-2 bg-clip-text text-transparent bg-linear-to-b from-primary to-primary/60">
@@ -187,7 +181,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Free Plan */}
-            <div className="glass-card p-8 rounded-2xl border-border hover:border-primary/50 transition-all text-left relative overflow-hidden">
+            <div className="textured-card bg-noise p-8 rounded-2xl border-border hover:border-primary/50 transition-all text-left relative overflow-hidden">
               <h3 className="text-2xl font-bold mb-2">Starter</h3>
               <div className="text-4xl font-bold mb-6">Grátis</div>
               <ul className="space-y-4 mb-8">
@@ -210,7 +204,7 @@ export default function Home() {
             </div>
 
             {/* Pro Plan */}
-            <div className="glass-card p-8 rounded-2xl border-primary shadow-glass-lg text-left relative overflow-hidden group">
+            <div className="textured-card bg-noise p-8 rounded-2xl border-primary shadow-glass-lg text-left relative overflow-hidden group">
               <div className="absolute top-0 right-0 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-bl-lg">
                 POPULAR
               </div>
@@ -241,7 +235,7 @@ export default function Home() {
                   <span>Suporte Prioritário</span>
                 </li>
               </ul>
-              <Button asChild className="w-full">
+              <Button asChild className="w-full btn-premium">
                 <Link href="/register">Começar Teste Grátis</Link>
               </Button>
             </div>
@@ -257,7 +251,7 @@ export default function Home() {
           </h2>
           <Button
             size="lg"
-            className="h-16 px-10 text-xl hover-scale shadow-xl shadow-primary/20 rounded-full"
+            className="h-16 px-10 text-xl btn-premium rounded-full"
           >
             <Link href="/register">
               <Dumbbell className="h-6 w-6 mr-3" />

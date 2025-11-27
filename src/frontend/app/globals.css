@@ -30,17 +30,17 @@
     --muted: 210 40% 96.1%;
     --muted-foreground: 215 16% 47%;
 
-    /* Primary (Deep Blue/Indigo) */
-    --primary: 221 83% 53%; /* #2563EB */
-    --primary-hover: #1d4ed8;
-    --primary-soft: rgba(37, 99, 235, 0.2);
-    --primary-foreground: 210 40% 98%;
+    /* Primary (Lime Green) */
+    --primary: 84 81% 44%; /* #84cc16 - Lime 500 equivalent */
+    --primary-hover: #65a30d; /* Lime 600 */
+    --primary-soft: rgba(132, 204, 22, 0.2);
+    --primary-foreground: 222 47% 11%; /* Dark text for contrast */
 
-    /* Accent (Vibrant Teal/Cyan) */
-    --accent: 173 80% 40%; /* #14B8A6 */
-    --accent-hover: #0d9488;
-    --accent-soft: rgba(20, 184, 166, 0.2);
-    --accent-foreground: 210 40% 98%;
+    /* Accent (Deep Teal/Green) */
+    --accent: 158 64% 52%; /* #34d399 - Emerald 400 */
+    --accent-hover: #10b981;
+    --accent-soft: rgba(52, 211, 153, 0.2);
+    --accent-foreground: 222 47% 11%;
 
     /* Status */
     --success: 142 71% 45%; /* #22C55E */
@@ -57,12 +57,12 @@
     --border-hover: 214.3 31.8% 85%;
 
     /* Shadows */
-    --shadow:
-      0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --shadow-medium:
-      0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    --shadow-large:
-      0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-large: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
     /* Legacy */
     --secondary: 210 40% 96.1%;
@@ -102,16 +102,16 @@
     --muted: 217 33% 17%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    /* Primary (Vibrant Blue/Indigo) */
-    --primary: 217 91% 60%; /* #3B82F6 */
-    --primary-hover: #60a5fa;
-    --primary-soft: rgba(59, 130, 246, 0.25);
+    /* Primary (Vibrant Lime) */
+    --primary: 84 81% 55%; /* #a3e635 - Lime 400 */
+    --primary-hover: #bef264; /* Lime 300 */
+    --primary-soft: rgba(163, 230, 53, 0.25);
     --primary-foreground: 222 47% 11%;
 
-    /* Accent (Neon Teal/Cyan) */
-    --accent: 173 80% 40%; /* #14B8A6 */
-    --accent-hover: #2dd4bf;
-    --accent-soft: rgba(20, 184, 166, 0.25);
+    /* Accent (Neon Emerald) */
+    --accent: 158 64% 52%; /* #34d399 */
+    --accent-hover: #6ee7b7;
+    --accent-soft: rgba(52, 211, 153, 0.25);
     --accent-foreground: 222 47% 11%;
 
     /* Status */
@@ -129,12 +129,12 @@
     --border-hover: 217 33% 25%;
 
     /* Shadows */
-    --shadow:
-      0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.15);
-    --shadow-medium:
-      0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
-    --shadow-large:
-      0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3),
+      0 2px 4px -1px rgba(0, 0, 0, 0.15);
+    --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.4),
+      0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    --shadow-large: 0 20px 25px -5px rgba(0, 0, 0, 0.5),
+      0 10px 10px -5px rgba(0, 0, 0, 0.3);
 
     /* Legacy */
     --secondary: 217 33% 17%;
@@ -184,9 +184,7 @@
 /* Focus visible styles */
 *:focus-visible {
   outline: none;
-  box-shadow:
-    0 0 0 2px hsl(var(--ring)),
-    0 0 0 4px hsl(var(--background));
+  box-shadow: 0 0 0 2px hsl(var(--ring)), 0 0 0 4px hsl(var(--background));
 }
 
 /* Smooth scrolling */
