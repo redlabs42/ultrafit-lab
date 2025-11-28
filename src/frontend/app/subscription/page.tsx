@@ -1,6 +1,14 @@
 "use client";
 
-import { Check, Crown, Shield, Star, Users, Zap } from "lucide-react";
+import {
+  Check,
+  Crown,
+  type LucideIcon,
+  Shield,
+  Star,
+  Users,
+  Zap,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -10,6 +18,19 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { useSubscriptionPlans } from "@/hooks/useSubscription";
 import { cn } from "@/lib/utils";
+
+interface Plan {
+  name: string;
+  description: string;
+  basePrice: number;
+  period: string;
+  features: string[];
+  cta: string;
+  variant: string;
+  icon: LucideIcon;
+  popular?: boolean;
+  badge?: string;
+}
 
 export default function SubscriptionPage() {
   const router = useRouter();
@@ -31,7 +52,7 @@ export default function SubscriptionPage() {
     });
   };
 
-  const handlePlanClick = (plan: any) => {
+  const handlePlanClick = (plan: Plan) => {
     if (plan.basePrice === 0) {
       // Free plan logic - maybe redirect to register or dashboard
       router.push("/dashboard");

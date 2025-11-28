@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Check, Copy, CreditCard, MapPin, QrCode, User } from "lucide-react";
+import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -17,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-const creditCardSchema = z.object({
+export const creditCardSchema = z.object({
   cardNumber: z.string().min(16, "Número do cartão inválido"),
   cardHolderName: z.string().min(3, "Nome do titular é obrigatório"),
   expiryMonth: z.string().min(2, "Mês inválido"),
@@ -32,12 +33,12 @@ const creditCardSchema = z.object({
   addressComplement: z.string().optional(),
 });
 
-const pixSchema = z.object({
+export const pixSchema = z.object({
   cpfCnpj: z.string().min(11, "CPF/CNPJ inválido"),
 });
 
-type CreditCardFormData = z.infer<typeof creditCardSchema>;
-type PixFormData = z.infer<typeof pixSchema>;
+export type CreditCardFormData = z.infer<typeof creditCardSchema>;
+export type PixFormData = z.infer<typeof pixSchema>;
 
 interface PaymentFormProps {
   onSubmitCreditCard: (data: CreditCardFormData) => void;
@@ -398,9 +399,11 @@ export function PaymentForm({
                 {pixQrCodeUrl && (
                   <div className="flex justify-center p-4 bg-white rounded-xl shadow-sm max-w-[200px] mx-auto">
                     {/* Assuming pixQrCodeUrl is a base64 image or URL */}
-                    <img
+                    <Image
                       src={`data:image/png;base64,${pixQrCodeUrl}`}
                       alt="QR Code PIX"
+                      width={200}
+                      height={200}
                       className="w-full h-auto"
                     />
                   </div>

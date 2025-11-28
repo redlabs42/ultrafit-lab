@@ -1,11 +1,11 @@
 "use client";
 
-import { exchangeCodeForTokens } from "@/lib/auth/cognito";
-import { useAuthStore } from "@/store";
-import type { AuthUser, User } from "@/types";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useRef } from "react";
 import { toast } from "sonner";
+import { exchangeCodeForTokens } from "@/lib/auth/cognito";
+import { useAuthStore } from "@/store";
+import type { AuthUser, User } from "@/types";
 
 function AuthCallbackContent() {
   const router = useRouter();

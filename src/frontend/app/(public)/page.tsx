@@ -95,7 +95,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Feature 1 */}
-            <div className="textured-card bg-noise hover-lift p-8 text-left group border-primary/10">
+            <div className="bg-surface/50 backdrop-blur-md border border-primary/10 rounded-3xl p-8 text-left group hover:border-primary/50 hover:bg-surface/80 transition-all duration-300">
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/10 mb-6 group-hover:bg-primary/20 transition-colors">
                 <Activity className="h-7 w-7 text-primary" />
               </div>
@@ -108,7 +108,7 @@ export default function Home() {
             </div>
 
             {/* Feature 2 */}
-            <div className="textured-card bg-noise hover-lift p-8 text-left group border-primary/10">
+            <div className="bg-surface/50 backdrop-blur-md border border-primary/10 rounded-3xl p-8 text-left group hover:border-primary/50 hover:bg-surface/80 transition-all duration-300">
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-accent/10 mb-6 group-hover:bg-accent/20 transition-colors">
                 <TrendingUp className="h-7 w-7 text-accent" />
               </div>
@@ -121,7 +121,7 @@ export default function Home() {
             </div>
 
             {/* Feature 3 */}
-            <div className="textured-card bg-noise hover-lift p-8 text-left group border-primary/10">
+            <div className="bg-surface/50 backdrop-blur-md border border-primary/10 rounded-3xl p-8 text-left group hover:border-primary/50 hover:bg-surface/80 transition-all duration-300">
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-success/10 mb-6 group-hover:bg-success/20 transition-colors">
                 <Target className="h-7 w-7 text-success" />
               </div>
@@ -138,7 +138,7 @@ export default function Home() {
 
       {/* Social Proof / Stats */}
       <section className="py-24 px-6 md:px-12 relative">
-        <div className="max-w-7xl mx-auto textured-card bg-noise p-12 md:p-16 rounded-3xl border-primary/20 bg-linear-to-br from-surface/80 to-surface/40">
+        <div className="max-w-7xl mx-auto bg-surface/50 backdrop-blur-md shadow-glass p-12 md:p-16 rounded-3xl border border-primary/20 bg-linear-to-br from-surface/80 to-surface/40">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center divide-y md:divide-y-0 md:divide-x divide-border/50">
             <div className="p-4">
               <div className="text-5xl md:text-6xl font-bold mb-2 bg-clip-text text-transparent bg-linear-to-b from-primary to-primary/60">
@@ -181,7 +181,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Free Plan */}
-            <div className="textured-card bg-noise p-8 rounded-2xl border-border hover:border-primary/50 transition-all text-left relative overflow-hidden">
+            <div className="bg-surface/50 backdrop-blur-md p-8 rounded-3xl border border-border hover:border-primary/50 hover:bg-surface/80 transition-all duration-300 text-left relative overflow-hidden">
               <h3 className="text-2xl font-bold mb-2">Starter</h3>
               <div className="text-4xl font-bold mb-6">Grátis</div>
               <ul className="space-y-4 mb-8">
@@ -204,7 +204,7 @@ export default function Home() {
             </div>
 
             {/* Pro Plan */}
-            <div className="textured-card bg-noise p-8 rounded-2xl border-primary shadow-glass-lg text-left relative overflow-hidden group">
+            <div className="bg-surface/50 backdrop-blur-md p-8 rounded-3xl border border-primary shadow-glass-lg text-left relative overflow-hidden group hover:shadow-primary/20 hover:bg-surface/80 transition-all duration-300">
               <div className="absolute top-0 right-0 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-bl-lg">
                 POPULAR
               </div>

@@ -101,7 +101,7 @@ export function PublicHeader() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border p-6 md:hidden flex flex-col gap-4 animate-in slide-in-from-top-5 shadow-xl bg-noise">
+        <div className="absolute top-full left-0 right-0 bg-background/70 backdrop-blur-2xl border-b border-border/40 p-6 md:hidden flex flex-col gap-4 animate-in slide-in-from-top-5 shadow-2xl">
           {navLinks.map((link) => (
             <Link
               key={link.href}

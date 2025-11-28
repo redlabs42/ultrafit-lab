@@ -5,7 +5,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import { toast } from "sonner";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
-import { PaymentForm } from "@/components/payments/PaymentForm";
+import {
+  type CreditCardFormData,
+  PaymentForm,
+} from "@/components/payments/PaymentForm";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -27,7 +30,7 @@ function CheckoutContent() {
 
   const selectedPlan = plans?.find((p) => p.id === planId);
 
-  const handleCreditCardPayment = async (data: any) => {
+  const handleCreditCardPayment = async (data: CreditCardFormData) => {
     if (!planId) return;
 
     try {
@@ -35,6 +38,8 @@ function CheckoutContent() {
       const paymentMethod = await paymentsService.addPaymentMethod({
         type: "credit_card",
         ...data,
+        expiryMonth: Number.parseInt(data.expiryMonth, 10),
+        expiryYear: Number.parseInt(data.expiryYear, 10),
       });
 
       // 2. Subscribe
